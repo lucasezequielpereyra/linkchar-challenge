@@ -1,13 +1,13 @@
 import './globals.css'
 
 export const metadata = {
-  title: 'Create Next App'
+  title: 'Linkchar App'
 }
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang="es">
+      <body className="h-full bg-background">{children}</body>
     </html>
   )
 }
