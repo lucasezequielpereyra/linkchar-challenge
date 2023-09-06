@@ -14,7 +14,7 @@ const Trailers = () => {
             height={170}
             className="rounded-xl -z-0 h-[170px] w-full"
           />
-          <div className="flex flex-row items-center justify-between absolute z-10 rounded-xl  bg-videoBackground -mt-[70px] w-full xl:w-[450px] max-w-full h-[70px] bg-gray-200 ">
+          <div className="flex flex-row items-center justify-between absolute z-10 rounded-xl  bg-videoBackground -mt-[70px] w-full max-w-full h-[70px] bg-gray-200 ">
             <div className="flex flex-row pl-6 gap-4">
               <div>
                 <PlayCircleIcon className="h-12 w-12 text-white" />
@@ -39,7 +39,7 @@ const Trailers = () => {
             height={170}
             className="rounded-xl -z-0 h-[170px] w-full"
           />
-          <div className="flex flex-row items-center justify-between absolute z-10 rounded-xl  bg-videoBackground -mt-[70px] w-full xl:w-[450px] max-w-full h-[70px] bg-gray-200 ">
+          <div className="flex flex-row items-center justify-between absolute z-10 rounded-xl  bg-videoBackground -mt-[70px] w-full max-w-full h-[70px] bg-gray-200 ">
             <div className="flex flex-row pl-6 gap-4">
               <div>
                 <PlayCircleIcon className="h-12 w-12 text-white" />
