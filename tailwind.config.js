@@ -11,7 +11,8 @@ module.exports = {
       colors: {
         primaryLogo: '#B7066F',
         secondaryLogo: '#FC6667',
-        background: '#17171b'
+        background: '#17171b',
+        videoBackground: 'rgba(219, 219, 219, 0.4)'
       }
     }
   },
