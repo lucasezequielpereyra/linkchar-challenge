@@ -1,86 +1,11 @@
 'use client'
 import { PlusCircleIcon } from '@heroicons/react/24/outline'
 import Select from 'react-select'
+import { useSelector } from 'react-redux'
+import { selectCurrentGenres } from '@/redux/movies/moviesSlice'
 
 const Genres = () => {
-  const availableGenres = [
-    {
-      id: 28,
-      name: 'Action'
-    },
-    {
-      id: 12,
-      name: 'Adventure'
-    },
-    {
-      id: 16,
-      name: 'Animation'
-    },
-    {
-      id: 35,
-      name: 'Comedy'
-    },
-    {
-      id: 80,
-      name: 'Crime'
-    },
-    {
-      id: 99,
-      name: 'Documentary'
-    },
-    {
-      id: 18,
-      name: 'Drama'
-    },
-    {
-      id: 10751,
-      name: 'Family'
-    },
-    {
-      id: 14,
-      name: 'Fantasy'
-    },
-    {
-      id: 36,
-      name: 'History'
-    },
-    {
-      id: 27,
-      name: 'Horror'
-    },
-    {
-      id: 10402,
-      name: 'Music'
-    },
-    {
-      id: 9648,
-      name: 'Mystery'
-    },
-    {
-      id: 10749,
-      name: 'Romance'
-    },
-    {
-      id: 878,
-      name: 'Science Fiction'
-    },
-    {
-      id: 10770,
-      name: 'TV Movie'
-    },
-    {
-      id: 53,
-      name: 'Thriller'
-    },
-    {
-      id: 10752,
-      name: 'War'
-    },
-    {
-      id: 37,
-      name: 'Western'
-    }
-  ]
+  const dataGenres = useSelector(selectCurrentGenres)
 
   const favoriteGenres = [
     {
@@ -109,7 +34,7 @@ const Genres = () => {
     }
   ]
 
-  const optionsFilter = availableGenres.map(genre => ({
+  const optionsFilter = dataGenres.map(genre => ({
     value: genre.id,
     label: genre.name
   }))
@@ -142,7 +67,7 @@ const Genres = () => {
                     border: '1px solid #ffffff',
                     boxShadow: 'none',
                     '&:hover': {
-                      border: 'none'
+                      border: '1px solid #B7066F'
                     }
                   }),
                   option: styles => ({
