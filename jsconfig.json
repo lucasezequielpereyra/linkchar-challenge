@@ -5,6 +5,7 @@
       "@components/*": ["./src/components/*"],
       "@app/*": ["./src/app/*"],
       "@views/*": ["./src/views/*"],
+      "@redux/*": ["./src/redux/*"],
     }
   }
 }

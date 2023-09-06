@@ -121,7 +121,9 @@ const Genres = () => {
         <div className="flex flex-col md:flex-row xl:flex-col gap-10">
           <div className="flex flex-row gap-3 flex-wrap px-6 xl:mt-3 md:h-2 xl:h-full">
             {favoriteGenres.map(genre => (
-              <span className="text-white px-2 rounded-md bg-primaryLogo">{genre.name}</span>
+              <span key={genre.id} className="text-white px-2 rounded-md bg-primaryLogo">
+                {genre.name}
+              </span>
             ))}
           </div>
           <div className="px-6 items-center">
