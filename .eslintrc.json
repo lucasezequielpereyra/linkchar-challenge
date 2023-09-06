@@ -16,8 +16,7 @@
         "react"
     ],
     "rules": {
-      "react/prop-types": "off",
-      "react/react-in-jsx-scope": "off",
-      "react/space-before-function-paren": "on"
+        "react/react-in-jsx-scope": "off",
+        "react/space-before-function-paren": "on"
     }
 }
