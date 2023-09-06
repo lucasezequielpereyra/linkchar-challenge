@@ -9,12 +9,14 @@ import {
   ArrowsPointingOutIcon
 } from '@heroicons/react/24/outline'
 import Image from 'next/image'
+import propTypes from 'prop-types'
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 
-const Nav = () => {
+const Nav = ({ dataUser }) => {
   const user = {
-    name: 'User',
-    email: 'user@example.com',
-    imageUrl: 'https://via.placeholder.com/32x32'
+    name: dataUser.user_metadata.full_name,
+    email: dataUser.email,
+    imageUrl: dataUser.user_metadata.avatar_url
   }
 
   const navigation = [
@@ -24,10 +26,16 @@ const Nav = () => {
     { name: 'Plans', href: '#', current: false }
   ]
 
-  const userNavigation = [{ name: 'Cerrar Sesión', href: '#' }]
-
   function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
+  }
+
+  console.log(dataUser)
+
+  const supabase = createClientComponentClient()
+  const handleSignOut = async () => {
+    await supabase.auth.signOut()
+    return window.location.reload()
   }
 
   return (
@@ -115,21 +123,19 @@ const Nav = () => {
                           leaveTo="transform opacity-0 scale-95"
                         >
                           <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                            {userNavigation.map(item => (
-                              <Menu.Item key={item.name}>
-                                {({ active }) => (
-                                  <a
-                                    href={item.href}
-                                    className={classNames(
-                                      active ? 'bg-gray-100' : '',
-                                      'block px-4 py-2 text-sm text-gray-700'
-                                    )}
-                                  >
-                                    {item.name}
-                                  </a>
-                                )}
-                              </Menu.Item>
-                            ))}
+                            <Menu.Item>
+                              {({ active }) => (
+                                <button
+                                  onClick={handleSignOut}
+                                  className={classNames(
+                                    active ? 'bg-gray-100' : '',
+                                    'block px-4 py-2 text-sm text-gray-700 w-full text-left'
+                                  )}
+                                >
+                                  Cerrar Sesión
+                                </button>
+                              )}
+                            </Menu.Item>
                           </Menu.Items>
                         </Transition>
                       </Menu>
@@ -157,7 +163,7 @@ const Nav = () => {
               </div>
 
               {/* Mobile menu, show/hide based on menu state. */}
-              <Disclosure.Panel className="md:hidden">
+              <Disclosure.Panel className="md:hidden z-50 absolute w-full bg-gray-950">
                 <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
                   {navigation.map(item => (
                     <Disclosure.Button
@@ -182,7 +188,7 @@ const Nav = () => {
                       <Image
                         className="h-10 w-10 rounded-full"
                         src={user.imageUrl}
-                        alt=""
+                        alt="Avatar de usuario"
                         width={32}
                         height={32}
                       />
@@ -205,16 +211,13 @@ const Nav = () => {
                     </button>
                   </div>
                   <div className="mt-3 space-y-1 px-2">
-                    {userNavigation.map(item => (
-                      <Disclosure.Button
-                        key={item.name}
-                        as="a"
-                        href={item.href}
-                        className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
-                      >
-                        {item.name}
-                      </Disclosure.Button>
-                    ))}
+                    <Disclosure.Button
+                      as="button"
+                      onClick={handleSignOut}
+                      className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
+                    >
+                      Cerrar Sesión
+                    </Disclosure.Button>
                   </div>
                 </div>
               </Disclosure.Panel>
@@ -228,3 +231,7 @@ const Nav = () => {
 }
 
 export default Nav
+
+Nav.propTypes = {
+  dataUser: propTypes.object
+}

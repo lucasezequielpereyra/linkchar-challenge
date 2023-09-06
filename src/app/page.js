@@ -1,4 +1,4 @@
-import Nav from '@/components/nav'
+import Nav from '@/views/nav'
 import Sidebar from '@/components/sidebar'
 
 export default function Page() {
