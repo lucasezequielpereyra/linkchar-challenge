@@ -1,8 +1,8 @@
 'use client'
 import './globals.css'
-import Protected from '@/views/protected'
 import { store } from '@redux/store'
 import { Provider } from 'react-redux'
+import Protected from '@views/protected'
 
 export default function RootLayout({ children }) {
   return (
