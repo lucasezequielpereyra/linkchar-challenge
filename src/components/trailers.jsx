@@ -21,7 +21,7 @@ const Trailers = ({ random }) => {
                 alt="Picture of the author"
                 width={450}
                 height={170}
-                className="rounded-xl -z-0 h-[170px]  w-[450px] md:w-full lg:w-[450px] xl:w-full"
+                className="rounded-xl -z-0 h-[170px]  w-[450px] md:w-[450px] lg:w-[450px] xl:w-full 2xl:w-[380px] object-cover"
               />
               <div className="flex flex-row items-center justify-between absolute z-10 rounded-xl  bg-videoBackground -mt-[70px] max-w-full  w-[450px] md:w-full lg:w-[450px] xl:w-full h-[70px] bg-gray-200 ">
                 <div className="flex flex-row pl-6 gap-4">
