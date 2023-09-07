@@ -3,7 +3,7 @@ import { PlayCircleIcon } from '@heroicons/react/24/outline'
 
 const Trailers = () => {
   return (
-    <div className="w-full h-full p-6 flex flex-col">
+    <div className="w-full h-full p-6 flex flex-col border-b border-gray-800">
       <h3 className="text-white text-xl">Nuevos Trailers</h3>
       <div className="flex flex-col md:flex-row xl:flex-col gap-4 mt-4 xl:mt-10 items-center">
         <div className="relative h-full w-full">

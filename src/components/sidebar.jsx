@@ -3,9 +3,9 @@ import Genres from '@/views/genres'
 
 const Sidebar = () => {
   return (
-    <div className="flex flex-row w-full xl:flex-column xl:w-1/4 h-full xl:border-r border-gray-800 m-0 p-0">
-      <div className="border-b xl:border-b border-gray-800 w-full h-[30rem] md:h-72 xl:h-[30rem] ">
-        <div>
+    <div className="flex flex-row w-full h-full xl:flex-column xl:w-1/4 xl:border-r border-gray-800 m-0 p-0 pb-6">
+      <div className="w-full">
+        <div className="flex flex-col h-full w-full flex-shrink">
           <Trailers />
           <Genres />
         </div>
