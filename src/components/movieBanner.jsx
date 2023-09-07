@@ -27,7 +27,7 @@ const MovieBanner = ({ movie }) => {
         </div>
         <div className="px-6 flex flex-row">
           <div className="bg-white px-2 py-1 rounded-lg text-sm flex gap-2">
-            {movie.vote_average}/10
+            {movie?.vote_average}/10
             <span>
               <StarIcon className="h-5 w-5 text-yellow-500" />
             </span>
