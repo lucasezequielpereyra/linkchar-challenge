@@ -43,7 +43,7 @@ const Genres = () => {
     <div className="h-full w-full mt-4 xl:mt-2">
       <div>
         <h3 className="text-white p-6 text-xl">Generos Favoritos</h3>
-        <div className="flex flex-col md:flex-row xl:flex-col gap-10">
+        <div className="flex flex-col md:flex-row md:w-full md:justify-evenly xl:flex-col gap-10 px-6">
           <div className="flex flex-row gap-3 flex-wrap px-6 xl:mt-3 md:h-2 xl:h-full">
             {favoriteGenres.map(genre => (
               <span key={genre.id} className="text-white px-2 rounded-md bg-primaryLogo">
@@ -52,11 +52,11 @@ const Genres = () => {
             ))}
           </div>
           <div className="px-6 items-center">
-            <span className="text-white px-4 text-md flex flex-row gap-2">
+            <span className="text-white px-0 text-md flex flex-row gap-2 mb-3">
               <PlusCircleIcon className="h-6 w-6" />
               Agregue sus generos favoritos
             </span>
-            <div className="flex flex-row gap-6 items-center pl-4 mt-4">
+            <div className="flex flex-row gap-6">
               <Select
                 placeholder="Selecciona los generos"
                 className="w-72"
