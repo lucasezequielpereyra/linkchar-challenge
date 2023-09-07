@@ -13,7 +13,7 @@ const Trailers = ({ random }) => {
   return (
     <div className="w-full h-full p-6 flex flex-col border-b border-gray-800 px-10 xl:px-4 2xl:px-10">
       <h3 className="text-white text-xl">Nuevos Trailers</h3>
-      <div className="flex flex-col md:flex-row xl:flex-col gap-4 mt-4 xl:mt-10 items-center m-auto">
+      <div className="flex flex-col md:flex-row xl:flex-col gap-4 mt-4 xl:mt-6 items-center m-auto">
         {randomMovies.map((movie, index) => {
           return (
             <div className="relative h-full w-full" key={index}>
