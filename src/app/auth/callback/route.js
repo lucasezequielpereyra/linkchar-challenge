@@ -11,8 +11,7 @@ export async function GET(request) {
   if (code !== null) {
     const supabase = createRouteHandlerClient({ cookies })
     await supabase.auth.exchangeCodeForSession(code)
-    return NextResponse.redirect('http://localhost:3000/', { status: 302 })
   }
 
-  return NextResponse.redirect('http://localhost:3000/auth/login', { status: 401 })
+  return NextResponse.redirect('http://localhost:3000/', { status: 302 })
 }
