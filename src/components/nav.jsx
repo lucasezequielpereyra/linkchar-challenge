@@ -30,8 +30,6 @@ const Nav = ({ dataUser }) => {
     return classes.filter(Boolean).join(' ')
   }
 
-  console.log(dataUser)
-
   const supabase = createClientComponentClient()
   const handleSignOut = async () => {
     await supabase.auth.signOut()
