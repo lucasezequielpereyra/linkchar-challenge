@@ -8,9 +8,7 @@ const Movies = ({ random }) => {
   const randomMovie = dataMovies[random]
 
   return (
-    <div className="w-full px-16 py-12">
-      <MovieBanner movie={randomMovie} />
-    </div>
+    <div className="w-full px-16 py-12">{randomMovie && <MovieBanner movie={randomMovie} />}</div>
   )
 }
 

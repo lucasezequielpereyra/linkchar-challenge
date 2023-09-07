@@ -1,5 +1,5 @@
 'use client'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useGetNewsMoviesQuery } from '@/redux/movies/moviesApiSlice'
 import { getNewsMovies } from '@/redux/movies/moviesSlice'
 import { useDispatch } from 'react-redux'
@@ -8,13 +8,14 @@ import TrailersComponent from '@/components/trailers'
 const Trailers = () => {
   const dispatch = useDispatch()
 
-  const { data, isSuccess } = useGetNewsMoviesQuery()
+  const { data, isSuccess, status } = useGetNewsMoviesQuery()
+  const [loading, setLoading] = useState(true)
 
   // url for normalize images
   const baseImageUrl = 'https://image.tmdb.org/t/p/w500'
 
   useEffect(() => {
-    if (isSuccess) {
+    if (status === 'fulfilled') {
       dispatch(
         getNewsMovies(
           data?.results.map(movie => ({
@@ -25,7 +26,10 @@ const Trailers = () => {
         )
       )
     }
-  }, [isSuccess])
+    if (status === 'fulfilled') {
+      setLoading(false)
+    }
+  }, [status])
 
   const getRandom = () => {
     let n1 = Math.floor(Math.random() * (19 - 0)) + 0
@@ -36,10 +40,18 @@ const Trailers = () => {
       n2 = Math.floor(Math.random() * (19 - 0)) + 0
     }
 
-    return [n1, n2]
+    return { n1, n2 }
   }
 
-  return <TrailersComponent random={getRandom()} />
+  return (
+    <>
+      {loading ? (
+        <div className="loading text-white">Loading...</div>
+      ) : (
+        <TrailersComponent random={getRandom} />
+      )}
+    </>
+  )
 }
 
 export default Trailers
