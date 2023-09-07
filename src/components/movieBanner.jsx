@@ -3,7 +3,6 @@ import Image from 'next/image'
 import { PlayIcon, StarIcon } from '@heroicons/react/24/outline'
 
 const MovieBanner = ({ movie }) => {
-  console.log(movie)
   return (
     <div className="relative h-full w-full">
       <h2 className="text-white text-2xl font-bold px-2">{movie?.title}</h2>
