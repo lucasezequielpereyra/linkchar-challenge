@@ -9,7 +9,7 @@ const moviesApiSlice = apiSlice.injectEndpoints({
       query: () => '/genre/movie/list?language=es'
     }),
     getNewsMovies: builder.query({
-      query: ({ id }) => `/movie/${id}/videos?language=es`
+      query: () => `/movie/upcoming?language=es-ES&page=1`
     })
   })
 })

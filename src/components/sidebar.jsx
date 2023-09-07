@@ -1,4 +1,4 @@
-import Trailers from '@components/trailers'
+import Trailers from '@/views/trailers'
 import Genres from '@/views/genres'
 
 const Sidebar = () => {
