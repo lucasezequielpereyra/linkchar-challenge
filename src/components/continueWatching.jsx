@@ -12,7 +12,7 @@ import {
 
 const ContinueWatching = ({ dataMovies }) => {
   return (
-    <div className="className=relative h-full w-full mt-16">
+    <div className="relative h-full w-full mt-16">
       <div className="mb-4 flex items-center justify-between">
         <div className="flex items-center">
           <h2 className="text-white text-2xl font-bold px-2 w-fit">Continuar Viendo</h2>
@@ -23,9 +23,9 @@ const ContinueWatching = ({ dataMovies }) => {
           All Movies <ChevronRightIcon className="h-4 w-4" />
         </button>
       </div>
-      <div className="flex flex-col gap-4 md:flex-row">
+      <div className="flex flex-col gap-4 lg:flex-row">
         <div className="relative h-full w-full">
-          <div className="flex flex-row items-center justify-between absolute z-10 rounded-md px-2 py-1  bg-transparent backdrop-blur-lg mt-4 ml-4 max-w-full  w-full md:w-full lg:w-[450px] xl:w-fit h-[35px]">
+          <div className="flex flex-row items-center justify-between absolute z-10 rounded-md px-2 py-1  bg-transparent backdrop-blur-lg mt-4 ml-4 max-w-full  w-fit h-[35px]">
             <span className="text-white">#1 Trending 🔥</span>
           </div>
           <Image
@@ -35,10 +35,10 @@ const ContinueWatching = ({ dataMovies }) => {
             height={170}
             className="rounded-xl -z-0 h-64 w-full object-cover"
           />
-          <div className="flex flex-row items-center justify-between absolute z-10 rounded-xl  bg-videoBackground backdrop-blur-sm -mt-[100px] max-w-full  w-full md:w-full lg:w-[450px] xl:w-full h-[100px]  ">
-            <div className="flex flex-row pl-6 gap-4">
+          <div className="flex flex-row items-center justify-between absolute z-10 rounded-xl  bg-videoBackground backdrop-blur-sm -mt-[100px] max-w-full  w-full h-[100px]">
+            <div className="flex flex-row pl-6 gap-4 items-center">
               <div>
-                <PlayIcon className="h-14 w-14 text-white cursor-pointer" />
+                <PlayIcon className="h-10 w-10 sm:h-14 sm:w-14 text-white cursor-pointer" />
               </div>
               <div className="h-full w-full flex flex-col justify-center text-white">
                 <div className="text-lg font-semibold"> {dataMovies[0]?.title}</div>
@@ -58,7 +58,7 @@ const ContinueWatching = ({ dataMovies }) => {
         </div>
 
         <div className="relative h-full w-full">
-          <div className="flex flex-row items-center justify-between absolute z-10 rounded-md px-2 py-1  bg-transparent backdrop-blur-lg mt-4 ml-4 max-w-full  w-full md:w-full lg:w-[450px] xl:w-fit h-[35px]">
+          <div className="flex flex-row items-center justify-between absolute z-10 rounded-md px-2 py-1  bg-transparent backdrop-blur-lg mt-4 ml-4 max-w-fit h-[35px]">
             <div className="flex -space-x-2 p-2 overflow-hidden">
               <Image
                 className="inline-block h-8 w-8 rounded-full ring-2 ring-white"
@@ -84,13 +84,13 @@ const ContinueWatching = ({ dataMovies }) => {
             height={170}
             className="rounded-xl -z-0 h-64 w-full object-cover"
           />
-          <div className="flex flex-row items-center justify-between absolute z-10 rounded-xl  bg-videoBackground backdrop-blur-sm -mt-[100px] max-w-full  w-full md:w-full lg:w-[450px] xl:w-full h-[100px]  ">
+          <div className="flex flex-row items-center justify-between absolute z-10 rounded-xl  bg-videoBackground backdrop-blur-sm -mt-[100px] max-w-full  w-full  h-[100px]  ">
             <div className="flex flex-row pl-6 gap-4">
               <div>
                 <PauseIcon className="h-14 w-14 text-white cursor-pointer" />
               </div>
             </div>
-            <div className="h-full w-full flex items-center gap-8">
+            <div className="h-full w-full hidden sm:flex items-center gap-8 ">
               <span className="text-gray-400 text-sm ml-2">32:48</span>
               <div className="w-1/3 bg-gray-200 rounded-full h-2 dark:bg-gray-700">
                 <div className="bg-blue-600 h-2 rounded-full w-1/3"></div>
