@@ -91,7 +91,7 @@ const ContinueWatching = ({ dataMovies }) => {
               </div>
             </div>
             <div className="h-full w-full flex items-center gap-8">
-              <span className="text-gray-400 text-sm">32:48</span>
+              <span className="text-gray-400 text-sm ml-2">32:48</span>
               <div class="w-1/3 bg-gray-200 rounded-full h-2 dark:bg-gray-700">
                 <div class="bg-blue-600 h-2 rounded-full w-1/3"></div>
               </div>
