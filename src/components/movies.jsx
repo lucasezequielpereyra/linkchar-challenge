@@ -27,7 +27,7 @@ const Movies = ({ random }) => {
   })
 
   return (
-    <div className="flex flex-col w-full px-10 lg:px-16 py-12">
+    <div className="flex xl:ml-[25%] 2xl:w-3/4 xl:w-fit flex-col w-full px-10 md:px-24 lg:px-16 py-12">
       <div className="w-full">{randomMovie && <MovieBanner movie={randomMovie} />}</div>
       <div className="w-full">
         {continueWatching !== undefined && <ContinueWatching dataMovies={continueWatching} />}
