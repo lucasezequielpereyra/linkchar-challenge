@@ -20,10 +20,8 @@ const Nav = ({ dataUser }) => {
   }
 
   const navigation = [
-    { name: 'Movies', href: '#', current: true },
-    { name: 'TV Shows', href: '#', current: false },
-    { name: 'Animations', href: '#', current: false },
-    { name: 'Plans', href: '#', current: false }
+    { name: 'Inicio', href: '#', current: true },
+    { name: 'Peliculas', href: '#', current: false }
   ]
 
   function classNames(...classes) {
@@ -60,8 +58,8 @@ const Nav = ({ dataUser }) => {
                             href={item.href}
                             className={classNames(
                               item.current
-                                ? 'border-b text-white'
-                                : 'text-gray-600 hover:border-b-2 hover:text-white',
+                                ? 'border-b border-primaryLogo text-white'
+                                : 'text-gray-600 hover:border-b-2 border-primaryLogo hover:text-white',
                               'rounded-md px-3 py-2 text-md font-medium'
                             )}
                             aria-current={item.current ? 'page' : undefined}
