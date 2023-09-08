@@ -11,8 +11,11 @@ import {
 import Image from 'next/image'
 import propTypes from 'prop-types'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import { usePathname } from 'next/navigation'
 
 const Nav = ({ dataUser }) => {
+  const pathname = usePathname()
+
   const user = {
     name: dataUser.user_metadata.full_name,
     email: dataUser.email,
@@ -20,8 +23,8 @@ const Nav = ({ dataUser }) => {
   }
 
   const navigation = [
-    { name: 'Inicio', href: '#', current: true },
-    { name: 'Peliculas', href: '#', current: false }
+    { name: 'Inicio', href: '/', current: pathname === '/' },
+    { name: 'Peliculas', href: '/movies', current: pathname === '/movies' }
   ]
 
   function classNames(...classes) {
