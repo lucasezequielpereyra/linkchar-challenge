@@ -25,7 +25,7 @@ const Nav = ({ dataUser }) => {
 
   const navigation = [
     { name: 'Inicio', href: '/', current: pathname === '/' },
-    { name: 'Peliculas', href: '/movies', current: pathname === '/movies' }
+    { name: 'Peliculas', href: '/movie', current: pathname === '/movie' }
   ]
 
   function classNames(...classes) {
@@ -82,7 +82,9 @@ const Nav = ({ dataUser }) => {
                         className="relative rounded-full p-1 text-white hover:text-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                       >
                         <span className="sr-only">Buscar peliculas</span>
-                        <MagnifyingGlassIcon className="h-6 w-6" aria-hidden="true" />
+                        <Link href="/movie">
+                          <MagnifyingGlassIcon className="h-6 w-6" aria-hidden="true" />
+                        </Link>
                       </button>
                       <button
                         type="button"
@@ -148,7 +150,9 @@ const Nav = ({ dataUser }) => {
                       className="relative rounded-full p-1 text-white hover:text-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 mr-3"
                     >
                       <span className="sr-only">Buscar peliculas</span>
-                      <MagnifyingGlassIcon className="h-6 w-6" aria-hidden="true" />
+                      <Link href="/movie">
+                        <MagnifyingGlassIcon className="h-6 w-6" aria-hidden="true" />
+                      </Link>
                     </button>
                     <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                       <span className="sr-only">Abrir menu principal</span>

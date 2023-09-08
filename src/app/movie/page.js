@@ -2,6 +2,7 @@ import { cookies } from 'next/headers'
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import { redirect } from 'next/navigation'
 import Nav from '@/views/nav'
+import MoviesList from '@/views/moviesList'
 
 export const metadata = {
   title: 'Linkchar | Movies'
@@ -22,6 +23,7 @@ export default async function Page() {
       {session && (
         <>
           <Nav />
+          <MoviesList />
         </>
       )}
     </>
