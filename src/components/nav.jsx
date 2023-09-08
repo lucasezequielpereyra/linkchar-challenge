@@ -12,6 +12,7 @@ import Image from 'next/image'
 import propTypes from 'prop-types'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { usePathname } from 'next/navigation'
+import Link from 'next/link'
 
 const Nav = ({ dataUser }) => {
   const pathname = usePathname()
@@ -56,7 +57,7 @@ const Nav = ({ dataUser }) => {
                     <div className="hidden md:block">
                       <div className="ml-12 lg:ml-20 xl:ml-32 flex items-baseline space-x-2 lg:space-x-4 xl:space-x-10">
                         {navigation.map(item => (
-                          <a
+                          <Link
                             key={item.name}
                             href={item.href}
                             className={classNames(
@@ -68,7 +69,7 @@ const Nav = ({ dataUser }) => {
                             aria-current={item.current ? 'page' : undefined}
                           >
                             {item.name}
-                          </a>
+                          </Link>
                         ))}
                       </div>
                     </div>
@@ -167,7 +168,7 @@ const Nav = ({ dataUser }) => {
                   {navigation.map(item => (
                     <Disclosure.Button
                       key={item.name}
-                      as="a"
+                      as={Link}
                       href={item.href}
                       className={classNames(
                         item.current

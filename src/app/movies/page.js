@@ -1,9 +1,13 @@
-import Nav from '@/views/nav'
 import { cookies } from 'next/headers'
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import { redirect } from 'next/navigation'
+import Nav from '@/views/nav'
 
-const Page = async () => {
+export const metadata = {
+  title: 'Linkchar | Movies'
+}
+
+export default async function Page() {
   const supabase = createServerComponentClient({ cookies })
   const {
     data: { session }
@@ -12,6 +16,7 @@ const Page = async () => {
   if (session === null) {
     redirect('/login')
   }
+
   return (
     <>
       {session && (
@@ -22,5 +27,3 @@ const Page = async () => {
     </>
   )
 }
-
-export default Page
