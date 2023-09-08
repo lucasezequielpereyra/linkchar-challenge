@@ -1,12 +1,7 @@
 'use client'
 import { useGetGenresQuery } from '@/redux/movies/moviesApiSlice'
 import { getGenres, selectCurrentGenres } from '@/redux/movies/moviesSlice'
-import {
-  newFavGenre,
-  removeFavGenre,
-  clearFavGenres,
-  selectCurrentFavGenres
-} from '@/redux/user/userSlice'
+import { newFavGenre, removeFavGenre, selectCurrentFavGenres } from '@/redux/user/userSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState, useRef } from 'react'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
@@ -14,7 +9,7 @@ import GenresComponent from '@/components/genres'
 
 const Genres = () => {
   const dispatch = useDispatch()
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [addFavoriteGenre, setAddFavoriteGenre] = useState([])
   const [errorMsg, setErrorMsg] = useState('')
   const [favGenres, setFavGenres] = useState([])
@@ -36,7 +31,15 @@ const Genres = () => {
   }, [supabase.auth])
 
   // get genres from api redux
-  const { data, isSuccess, status } = useGetGenresQuery()
+  const { data, status } = useGetGenresQuery()
+
+  // set genres to redux
+  useEffect(() => {
+    if (status === 'fulfilled') {
+      dispatch(getGenres(data))
+      setLoading(false)
+    }
+  }, [status])
 
   // get fav genres from redux
   const favGenresRedux = useSelector(selectCurrentFavGenres)
@@ -74,17 +77,6 @@ const Genres = () => {
     )
     setAvailableGenres(filterGenres)
   }, [favGenres])
-
-  // set genres to redux
-  useEffect(() => {
-    if (status === 'pending') {
-      setLoading(true)
-    }
-    if (isSuccess) {
-      dispatch(getGenres(data))
-      setLoading(false)
-    }
-  }, [isSuccess])
 
   const handleChangeFavGenre = e => {
     setErrorMsg('')
