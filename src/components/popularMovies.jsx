@@ -3,7 +3,6 @@ import Image from 'next/image'
 import { PlayIcon, ChevronRightIcon, StarIcon } from '@heroicons/react/24/outline'
 
 const PopularMovies = ({ dataMovies }) => {
-  console.log(dataMovies)
   return (
     <div className="h-full w-full mt-16">
       <div className="mb-4 flex items-center justify-between">

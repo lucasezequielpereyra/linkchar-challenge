@@ -45,7 +45,9 @@ const Genres = () => {
 
   // set fav genres to local state
   useEffect(() => {
-    setFavGenres(favGenresRedux)
+    if (favGenresRedux?.length > 0) {
+      setFavGenres(favGenresRedux)
+    }
   }, [favGenresRedux])
 
   // save fav genres to supabase
@@ -108,9 +110,10 @@ const Genres = () => {
   }
 
   // mehtod to delete favorite genre
-  const handleDeleteFavGenre = async id => {
-    const findGenre = favGenres.find(genre => genre.id === id)
-    dispatch(removeFavGenre(findGenre))
+  const handleDeleteFavGenre = id => {
+    const newGenres = favGenres.filter(genre => genre.id !== id)
+    setFavGenres(newGenres)
+    dispatch(removeFavGenre(id))
   }
 
   return (

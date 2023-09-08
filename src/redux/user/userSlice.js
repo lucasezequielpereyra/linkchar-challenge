@@ -21,9 +21,9 @@ const userSlice = createSlice({
       state.favGenres = state.favGenres.filter(genre => genre.id === action.payload.id)
     },
     removeFavGenre: (state, action) => {
-      state.favGenres = state.favGenres.filter(genre => genre.id !== action.payload.id)
+      state.favGenres = state.favGenres.filter(genre => genre.id !== action.payload)
     },
-    clearFavGenres: (state, action) => {
+    clearFavGenres: state => {
       state.favGenres = []
     }
   }

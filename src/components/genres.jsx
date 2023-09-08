@@ -41,7 +41,7 @@ const Genres = ({
               <PlusCircleIcon className="h-6 w-6" />
               Agregar generos favoritos
             </span>
-            <div className="flex flex-col md:flex-row gap-6 lg:flex-col 2xl:flex-row lg:w-auto lg:gap-2 2xl:gap-6">
+            <div className="flex-col md:flex-row gap-6 lg:flex-col 2xl:flex-row lg:w-auto lg:gap-2 2xl:gap-6">
               <Select
                 placeholder="Selecciona los generos"
                 className="w-72 lg:w-64 2xl:w-72"
