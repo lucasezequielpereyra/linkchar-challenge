@@ -1,12 +1,12 @@
 import propTypes from 'prop-types'
-import Image from 'next/image'
 import { PlayIcon, StarIcon } from '@heroicons/react/24/outline'
+import Image from 'next/image'
 
-const MoviesByGenre = ({ dataMovies }) => {
+const FavMovies = ({ handleDeleteMovie, dataMovies }) => {
   return (
     <div className="h-full w-full mt-16">
       <div className="mb-4 flex items-center justify-between">
-        <h2 className="text-white text-2xl font-bold px-2 w-fit">Peliculas elegidas para vos</h2>
+        <h2 className="text-white text-2xl font-bold px-2 w-fit">Tu lista de peliculas</h2>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
         {dataMovies.map((movie, index) => {
@@ -30,10 +30,12 @@ const MoviesByGenre = ({ dataMovies }) => {
                 </div>
                 <div className="px-6 flex flex-row">
                   <div className="w-0.5 mr-2 bg-gradient-to-t from-gray-500 via-gray-200 to-gray-500"></div>
-                  <span className="text-sm text-white flex gap-1 items-center">
-                    <StarIcon className="h-5 w-5 t" />
-                    {movie.vote_average}
-                  </span>
+                  <button
+                    onClick={() => handleDeleteMovie(movie)}
+                    className="text-sm text-white flex gap-1 items-center"
+                  >
+                    Quitar de mi lista
+                  </button>
                 </div>
               </div>
             </div>
@@ -44,8 +46,8 @@ const MoviesByGenre = ({ dataMovies }) => {
   )
 }
 
-export default MoviesByGenre
+export default FavMovies
 
-MoviesByGenre.propTypes = {
-  dataMovies: propTypes.array
+FavMovies.propTypes = {
+  handleDeleteMovie: propTypes.func
 }

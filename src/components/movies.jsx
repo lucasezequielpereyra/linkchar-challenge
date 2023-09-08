@@ -6,18 +6,20 @@ import {
   selectCurrentGenres,
   selectCurrentMoviesByGenre
 } from '@/redux/movies/moviesSlice'
-import { selectCurrentFavGenres } from '@/redux/user/userSlice'
+import { selectCurrentFavGenres, selectCurrentFavMovies } from '@/redux/user/userSlice'
 import MovieBanner from './movieBanner'
 import ContinueWatching from './continueWatching'
 import PopularMovies from './popularMovies'
 import MoviesByGenre from './moviesByGenre'
+import FavMovies from './favMovies'
 
-const Movies = ({ random }) => {
+const Movies = ({ random, handleDeleteMovie }) => {
   const dataMovies = useSelector(selectCurrentMovies)
   const dataPopularMovies = useSelector(selectCurrentPopularMovies)
   const dataGenres = useSelector(selectCurrentGenres)
   const dataMoviesByGenre = useSelector(selectCurrentMoviesByGenre)
   const favGenres = useSelector(selectCurrentFavGenres)
+  const dataFavMovies = useSelector(selectCurrentFavMovies)
 
   const randomMovie = dataMovies[random]
 
@@ -45,6 +47,11 @@ const Movies = ({ random }) => {
           <MoviesByGenre dataMovies={dataMoviesByGenre} />
         )}
       </div>
+      <div className="w-full">
+        {dataFavMovies && (
+          <FavMovies dataMovies={dataFavMovies} handleDeleteMovie={handleDeleteMovie} />
+        )}
+      </div>
     </div>
   )
 }
@@ -52,5 +59,6 @@ const Movies = ({ random }) => {
 export default Movies
 
 Movies.propTypes = {
-  random: propTypes.number.isRequired
+  random: propTypes.number.isRequired,
+  handleDeleteMovie: propTypes.func.isRequired
 }

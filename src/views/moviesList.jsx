@@ -2,11 +2,68 @@
 import { useState, useEffect, useRef } from 'react'
 import SearchMovie from '@/components/searchMovie'
 import SearchMovieCards from '@/components/searchMovieCards'
+import { newFavMovie } from '@/redux/user/userSlice'
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectCurrentFavMovies } from '@/redux/user/userSlice'
 
 const MoviesList = () => {
   const [search, setSearch] = useState('')
   const [movies, setMovies] = useState([])
+  const [session, setSession] = useState(null)
+
   const searchRef = useRef(null)
+
+  const supabase = createClientComponentClient()
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    const checkUser = async () => {
+      const session = await supabase.auth.getSession()
+      const userSession = session?.data?.session
+      if (userSession) {
+        setSession(userSession)
+      }
+    }
+
+    checkUser()
+  }, [])
+
+  // get fav movies from redux
+  const favMoviesRedux = useSelector(selectCurrentFavMovies)
+  const [favMovies, setFavMovies] = useState([])
+  useEffect(() => {
+    if (favMoviesRedux?.length > 0) {
+      setFavMovies(favMoviesRedux)
+    }
+  }, [favMoviesRedux])
+
+  // set fav movies to local state
+  const handleAddToWatchList = async movie => {
+    if (!session?.user) {
+      return
+    }
+
+    // check if movie is already in fav movies
+    const movieExists = favMovies.find(favMovie => favMovie.id === movie.id)
+
+    if (movieExists) {
+      return
+    }
+
+    // save movie to supabase
+    const { data, error } = await supabase
+      .from('users')
+      .update({ favMovies: [...favMovies, movie] })
+      .eq('id', session.user.id)
+
+    if (error) {
+      return
+    }
+
+    // save movie to redux
+    dispatch(newFavMovie(movie))
+  }
 
   useEffect(() => {
     searchRef.current.focus()
@@ -70,7 +127,7 @@ const MoviesList = () => {
         handleSearchMovie={handleSearchMovie}
         movies={movies}
       />
-      <SearchMovieCards movies={movies} />
+      <SearchMovieCards movies={movies} handleAddToWatchList={handleAddToWatchList} />
     </div>
   )
 }

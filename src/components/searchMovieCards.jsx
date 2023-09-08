@@ -2,11 +2,11 @@ import propTypes from 'prop-types'
 import Image from 'next/image'
 import Balancer from 'react-wrap-balancer'
 
-const searchMovieCards = ({ movies }) => {
+const searchMovieCards = ({ movies, handleAddToWatchList }) => {
   return (
     <div>
       {/* Creame una galeria de imagenes con diseño material */}
-      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-10 px-44 w-full">
+      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-10 px-44 w-full pb-10">
         {movies.map(movie => (
           <div key={movie.id}>
             <span>
@@ -34,6 +34,13 @@ const searchMovieCards = ({ movies }) => {
                     <span className="ml-1">{movie.vote_average * 10}%</span>
                     <span className="mx-2">|</span>
                     <span>{movie.release_date ? movie.release_date.substring(0, 4) : '-'}</span>
+                    <button
+                      type="button"
+                      className="ml-2"
+                      onClick={() => handleAddToWatchList(movie)}
+                    >
+                      Agregar a mi lista
+                    </button>
                   </div>
                 </div>
               </div>
@@ -48,5 +55,6 @@ const searchMovieCards = ({ movies }) => {
 export default searchMovieCards
 
 searchMovieCards.propTypes = {
-  movies: propTypes.array.isRequired
+  movies: propTypes.array.isRequired,
+  handleAddToWatchList: propTypes.func.isRequired
 }
