@@ -20,11 +20,11 @@ const Trailers = ({ random }) => {
               <Image
                 src={movie?.backdrop_path}
                 alt="Picture of the author"
-                width={450}
+                width={1000}
                 height={170}
-                className="rounded-xl -z-0 h-[170px]  w-[450px] md:w-[450px] lg:w-[450px] xl:w-full 2xl:w-[380px] object-cover"
+                className="rounded-xl -z-0 h-[170px] lg:w-[450px] xl:w-full 2xl:w-[380px] object-cover"
               />
-              <div className="flex flex-row items-center justify-between absolute z-10 rounded-xl  bg-videoBackground -mt-[70px] max-w-full  w-[450px] md:w-full lg:w-[450px] xl:w-full h-[70px] bg-gray-200 ">
+              <div className="flex flex-row items-center justify-between absolute z-10 rounded-xl  bg-videoBackground backdrop-blur-sm -mt-[70px] max-w-full  w-full md:w-full lg:w-[450px] xl:w-full h-[70px] bg-gray-200 ">
                 <div className="flex flex-row pl-6 gap-4">
                   <div>
                     <PlayCircleIcon className="h-12 w-12 text-white cursor-pointer" />

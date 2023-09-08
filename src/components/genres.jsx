@@ -1,5 +1,6 @@
 'use client'
-import { PlusCircleIcon, ExclamationTriangleIcon } from '@heroicons/react/24/outline'
+import { useId } from 'react'
+import { PlusCircleIcon, ExclamationTriangleIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import Select from 'react-select'
 import propTypes from 'prop-types'
 
@@ -9,7 +10,8 @@ const Genres = ({
   errorMsg,
   favGenres,
   availableGenres,
-  selectRef
+  selectRef,
+  handleDeleteFavGenre
 }) => {
   const parseAvailableGenres = availableGenres?.map(genre => ({
     value: genre.id,
@@ -17,15 +19,21 @@ const Genres = ({
   }))
 
   return (
-    <div className="h-full w-full mt-4 xl:mt-2">
-      <div>
+    <div className="h-full w-full mt-4 pl-8 xl:pl-0 xl:mt-2">
+      <div className="flex flex-col gap-4 md:flex-row  xl:flex-col items-center m-auto">
         <h3 className="text-white p-6 text-xl">Generos Favoritos</h3>
         <div className="flex flex-col md:flex-row md:w-full md:justify-evenly xl:flex-col gap-10 px-6">
           <div className="flex flex-row gap-3 flex-wrap px-6 xl:mt-3 md:h-2 xl:h-full">
             {favGenres?.map((genre, index) => (
-              <span key={index} className="text-white px-2 rounded-md bg-primaryLogo">
-                {genre.name}
-              </span>
+              <div
+                key={index}
+                className="flex items-center text-white px-2 py-1 rounded-md bg-primaryLogo gap-1"
+              >
+                <span>{genre.name}</span>
+                <button onClick={() => handleDeleteFavGenre(genre.id)}>
+                  <XMarkIcon className="h-4 w-4" />
+                </button>
+              </div>
             ))}
           </div>
           <div className=" items-center">
@@ -64,12 +72,11 @@ const Genres = ({
                     paddingBottom: 0
                   })
                 }}
-                name="roles"
-                id="roles"
                 options={parseAvailableGenres}
                 isMulti
                 isClearable={false}
                 onChange={handleChangeFavGenre}
+                instanceId={useId()}
               />
               <button className="text-white text-left" onClick={() => handleNewFavGenre(favGenres)}>
                 Agregar
@@ -98,5 +105,6 @@ Genres.propTypes = {
   errorMsg: propTypes.string,
   favGenres: propTypes.array,
   availableGenres: propTypes.array,
-  selectRef: propTypes.object
+  selectRef: propTypes.object,
+  handleDeleteFavGenre: propTypes.func
 }
