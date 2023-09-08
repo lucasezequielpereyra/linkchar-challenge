@@ -9,15 +9,12 @@ const Movies = () => {
   const dispatch = useDispatch()
 
   const { data, isSuccess, status } = useGetMoviesQuery()
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
 
   // url for normalizing images
   const baseImageUrl = 'https://image.tmdb.org/t/p/w500'
 
   useEffect(() => {
-    if (status === 'pending') {
-      setLoading(true)
-    }
     if (isSuccess) {
       dispatch(
         getMovies(

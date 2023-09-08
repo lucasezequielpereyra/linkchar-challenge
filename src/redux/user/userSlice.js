@@ -17,17 +17,26 @@ const userSlice = createSlice({
       state.favGenres = action.payload
     },
     newFavGenre: (state, action) => {
-      // filter out the genre if it already exists
-      state.favGenres = state.favGenres.filter(genre => genre.id !== action.payload.id)
+      state.favGenres = state.favGenres.concat(action.payload)
+      state.favGenres = state.favGenres.filter(genre => genre.id === action.payload.id)
     },
     removeFavGenre: (state, action) => {
       state.favGenres = state.favGenres.filter(genre => genre.id !== action.payload.id)
+    },
+    clearFavGenres: (state, action) => {
+      state.favGenres = []
     }
   }
 })
 
-export const { getFavMovies, removeFavMovie, getFavGenres, removeFavGenre, newFavGenre } =
-  userSlice.actions
+export const {
+  getFavMovies,
+  removeFavMovie,
+  getFavGenres,
+  removeFavGenre,
+  newFavGenre,
+  clearFavGenres
+} = userSlice.actions
 
 export default userSlice.reducer
 

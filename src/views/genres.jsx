@@ -1,9 +1,15 @@
 'use client'
 import { useGetGenresQuery } from '@/redux/movies/moviesApiSlice'
 import { getGenres, selectCurrentGenres } from '@/redux/movies/moviesSlice'
-import { newFavGenre, selectCurrentFavGenres } from '@/redux/user/userSlice'
+import {
+  newFavGenre,
+  removeFavGenre,
+  clearFavGenres,
+  selectCurrentFavGenres
+} from '@/redux/user/userSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState, useRef } from 'react'
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import GenresComponent from '@/components/genres'
 
 const Genres = () => {
@@ -13,8 +19,21 @@ const Genres = () => {
   const [errorMsg, setErrorMsg] = useState('')
   const [favGenres, setFavGenres] = useState([])
   const [availableGenres, setAvailableGenres] = useState([])
-  const [savedGenres, setSavedGenres] = useState([])
+  const [session, setSession] = useState(null)
   const selectRef = useRef(null)
+
+  // supabase
+  const supabase = createClientComponentClient()
+
+  // get user session
+  useEffect(() => {
+    const getSession = async () => {
+      const session = await supabase.auth.getSession()
+      setSession(session?.data?.session?.user)
+    }
+
+    getSession()
+  }, [supabase.auth])
 
   // get genres from api redux
   const { data, isSuccess, status } = useGetGenresQuery()
@@ -26,26 +45,32 @@ const Genres = () => {
 
   // set fav genres to local state
   useEffect(() => {
-    if (favGenresRedux.length > 0) {
-      setFavGenres(favGenresRedux)
-    }
+    setFavGenres(favGenresRedux)
   }, [favGenresRedux])
+
+  // save fav genres to supabase
+  useEffect(() => {
+    if (session) {
+      const saveFavGenres = async () => {
+        await supabase.from('users').update({ favGenres: favGenres }).eq('id', session.id)
+      }
+      saveFavGenres()
+    }
+  }, [favGenres])
 
   // set genres to local state
   useEffect(() => {
-    if (genresRedux.length > 0) {
+    if (genresRedux?.length > 0) {
       setAvailableGenres(genresRedux)
     }
   }, [genresRedux])
 
   // filter available genres
   useEffect(() => {
-    if (favGenres.length > 0) {
-      const filterGenres = availableGenres.filter(
-        genre => !favGenres.find(favGenre => favGenre.id === genre.id)
-      )
-      setAvailableGenres(filterGenres)
-    }
+    const filterGenres = availableGenres.filter(
+      genre => !favGenres.find(favGenre => favGenre.id === genre.id)
+    )
+    setAvailableGenres(filterGenres)
   }, [favGenres])
 
   // set genres to redux
@@ -82,6 +107,12 @@ const Genres = () => {
     }
   }
 
+  // mehtod to delete favorite genre
+  const handleDeleteFavGenre = async id => {
+    const findGenre = favGenres.find(genre => genre.id === id)
+    dispatch(removeFavGenre(findGenre))
+  }
+
   return (
     <>
       {loading ? (
@@ -94,6 +125,7 @@ const Genres = () => {
           favGenres={favGenres}
           availableGenres={availableGenres}
           selectRef={selectRef}
+          handleDeleteFavGenre={handleDeleteFavGenre}
         />
       )}
     </>
