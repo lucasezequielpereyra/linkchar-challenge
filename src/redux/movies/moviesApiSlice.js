@@ -10,6 +10,10 @@ const moviesApiSlice = apiSlice.injectEndpoints({
     }),
     getNewsMovies: builder.query({
       query: () => `/movie/upcoming?language=es-ES&page=1`
+    }),
+    getPopularMovies: builder.query({
+      query: () =>
+        `/discover/movie?include_adult=false&include_video=false&language=es-ES&page=1&primary_release_year=2021&sort_by=popularity.desc`
     })
   })
 })
@@ -17,3 +21,4 @@ const moviesApiSlice = apiSlice.injectEndpoints({
 export const { useGetMoviesQuery } = moviesApiSlice
 export const { useGetGenresQuery } = moviesApiSlice
 export const { useGetNewsMoviesQuery } = moviesApiSlice
+export const { useGetPopularMoviesQuery } = moviesApiSlice
