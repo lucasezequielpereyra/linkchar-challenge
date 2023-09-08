@@ -31,7 +31,7 @@ const searchMovieCards = ({ movies, handleAddToWatchList }) => {
                         />
                       </g>
                     </svg>
-                    <span className="ml-1">{movie.vote_average * 10}%</span>
+                    <span className="ml-1">{movie.vote_average}</span>
                     <span className="mx-2">|</span>
                     <span>{movie.release_date ? movie.release_date.substring(0, 4) : '-'}</span>
                     <button
