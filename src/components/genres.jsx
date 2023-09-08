@@ -19,79 +19,86 @@ const Genres = ({
   }))
 
   return (
-    <div className="h-full w-full mt-4 pl-8 xl:pl-0 xl:mt-2">
-      <div className="flex flex-col gap-4 md:flex-row xl:flex-col items-center m-auto">
-        <h3 className="text-white p-6 text-xl">Generos Favoritos</h3>
-        <div className="flex flex-col md:flex-row md:w-full md:justify-evenly xl:flex-col gap-10 px-6">
-          <div className="flex flex-row gap-3 flex-wrap px-6 xl:mt-3 md:h-2 xl:h-full">
-            {favGenres?.map((genre, index) => (
-              <div
-                key={index}
-                className="flex items-center text-white px-2 py-1 rounded-md bg-primaryLogo gap-1"
-              >
-                <span>{genre.name}</span>
-                <button onClick={() => handleDeleteFavGenre(genre.id)}>
-                  <XMarkIcon className="h-4 w-4" />
-                </button>
-              </div>
-            ))}
+    <div className="flex flex-col h-full px-8 lg:px-10 mt-4">
+      <div className="flex flex-row items-center justify-between">
+        <h2 className="text-2xl font-normal text-white">Generos</h2>
+      </div>
+      <div className="flex flex-col mt-2 space-y-2">
+        {favGenres?.map(genre => (
+          <div
+            key={genre.id}
+            className="flex flex-row items-center justify-between px-2 py-1 space-x-2 bg-gray-100 rounded-md"
+          >
+            <span className="text-sm font-semibold">{genre.name}</span>
+            <button
+              className="flex flex-row items-center justify-center px-2 py-1 space-x-1 text-sm font-semibold text-white bg-red-500 rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+              onClick={() => handleDeleteFavGenre(genre.id)}
+            >
+              <XMarkIcon className="w-5 h-5" />
+              <span>Eliminar</span>
+            </button>
           </div>
-          <div className="2xl:flex 2xl:flex-col 2xl:items-center">
-            <span className="text-white px-0 text-md flex flex-row gap-2 mb-3">
-              <PlusCircleIcon className="h-6 w-6" />
-              Agregar generos favoritos
-            </span>
-            <div className="flex-col md:flex-row gap-6 lg:flex-col 2xl:flex-row lg:w-auto lg:gap-2 2xl:gap-6">
-              <Select
-                placeholder="Selecciona los generos"
-                className="w-72 lg:w-64 2xl:w-72"
-                ref={selectRef}
-                styles={{
-                  control: styles => ({
-                    ...styles,
-                    backgroundColor: 'transparent',
-                    border: '1px solid #ffffff',
-                    boxShadow: 'none',
-                    '&:hover': {
-                      border: '1px solid #B7066F'
-                    }
-                  }),
-                  option: styles => ({
-                    ...styles,
-                    backgroundColor: '#564d4d',
-                    color: '#ffffff',
-                    '&:hover': {
-                      backgroundColor: '#564d4d',
-                      color: '#fff'
-                    }
-                  }),
-                  dropdownIndicator: styles => ({
-                    ...styles,
-                    color: '#ffffff',
-                    paddingTop: 0,
-                    paddingBottom: 0
-                  })
-                }}
-                options={parseAvailableGenres}
-                isMulti
-                isClearable={false}
-                onChange={handleChangeFavGenre}
-                instanceId={useId()}
-              />
-              <button className="text-white text-left" onClick={() => handleNewFavGenre(favGenres)}>
-                Agregar
-              </button>
-              {errorMsg && (
-                <span className="text-red-500 font-bold text-sm flex gap-1 items-center px-2 py-1 rounded-lg bg-transparentData w-fit">
-                  <span className="flex-shrink">
-                    <ExclamationTriangleIcon className="h-4 w-4" />
-                  </span>
-                  {errorMsg}
-                </span>
-              )}
-            </div>
+        ))}
+      </div>
+      <div className="flex flex-col mt-2 space-y-2">
+        <label htmlFor="genres" className="text-sm font-semibold text-white">
+          Generos disponibles
+        </label>
+        <Select
+          id="genres"
+          name="genres"
+          aria-label="Genres"
+          inputId={useId()}
+          instanceId={useId()}
+          ref={selectRef}
+          options={parseAvailableGenres}
+          onChange={handleChangeFavGenre}
+          isMulti
+          isSearchable
+          isClearable
+          placeholder="Selecciona generos"
+          noOptionsMessage={() => 'No genres found'}
+          className="w-full"
+          styles={{
+            control: styles => ({
+              ...styles,
+              backgroundColor: 'transparent',
+              border: '1px solid #ffffff',
+              boxShadow: 'none',
+              '&:hover': {
+                border: '1px solid #B7066F'
+              }
+            }),
+            option: styles => ({
+              ...styles,
+              backgroundColor: '#fff',
+              color: '#000',
+              '&:hover': {
+                backgroundColor: '#a9a9a9',
+                color: '#000'
+              }
+            }),
+            dropdownIndicator: styles => ({
+              ...styles,
+              color: '#ffffff',
+              paddingTop: 0,
+              paddingBottom: 0
+            })
+          }}
+        />
+        <button
+          className="flex flex-row items-center justify-center px-2 py-1 space-x-1 text-sm font-semibold text-white bg-primaryLogo rounded-md hover:bg-secondaryLogo w-auto "
+          onClick={() => handleNewFavGenre(favGenres)}
+        >
+          <PlusCircleIcon className="w-5 h-5" />
+          <span>Agregar</span>
+        </button>
+        {errorMsg && (
+          <div className="flex flex-row items-center justify-start px-2 py-1 space-x-1 text-sm font-semibold text-red-500 bg-red-100 rounded-md">
+            <ExclamationTriangleIcon className="w-5 h-5" />
+            <span>{errorMsg}</span>
           </div>
-        </div>
+        )}
       </div>
     </div>
   )
