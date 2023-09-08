@@ -3,16 +3,21 @@ import { useSelector } from 'react-redux'
 import {
   selectCurrentMovies,
   selectCurrentPopularMovies,
-  selectCurrentGenres
+  selectCurrentGenres,
+  selectCurrentMoviesByGenre
 } from '@/redux/movies/moviesSlice'
+import { selectCurrentFavGenres } from '@/redux/user/userSlice'
 import MovieBanner from './movieBanner'
 import ContinueWatching from './continueWatching'
 import PopularMovies from './popularMovies'
+import MoviesByGenre from './moviesByGenre'
 
 const Movies = ({ random }) => {
   const dataMovies = useSelector(selectCurrentMovies)
   const dataPopularMovies = useSelector(selectCurrentPopularMovies)
   const dataGenres = useSelector(selectCurrentGenres)
+  const dataMoviesByGenre = useSelector(selectCurrentMoviesByGenre)
+  const favGenres = useSelector(selectCurrentFavGenres)
 
   const randomMovie = dataMovies[random]
 
@@ -34,6 +39,11 @@ const Movies = ({ random }) => {
       </div>
       <div className="w-full">
         {popularMovies && <PopularMovies dataMovies={popularWithGenres} />}
+      </div>
+      <div className="w-full">
+        {dataMoviesByGenre && favGenres.length > 0 && (
+          <MoviesByGenre dataMovies={dataMoviesByGenre} />
+        )}
       </div>
     </div>
   )
