@@ -29,8 +29,8 @@ const ContinueWatching = ({ dataMovies }) => {
             <span className="text-white">#1 Trending 🔥</span>
           </div>
           <Image
-            src={dataMovies[0]?.backdrop_path}
-            alt="Picture of the author"
+            src={dataMovies[0]?.backdrop_path || 'http://via.placeholder.com/640x360'}
+            alt="Banner de la pelicula"
             width={1000}
             height={170}
             className="rounded-xl -z-0 h-64 w-full object-cover"
@@ -59,7 +59,7 @@ const ContinueWatching = ({ dataMovies }) => {
 
         <div className="relative h-full w-full">
           <div className="flex flex-row items-center justify-between absolute z-10 rounded-md px-2 py-1  bg-transparent backdrop-blur-lg mt-4 ml-4 max-w-full  w-full md:w-full lg:w-[450px] xl:w-fit h-[35px]">
-            <div class="flex -space-x-2 p-2 overflow-hidden">
+            <div className="flex -space-x-2 p-2 overflow-hidden">
               <Image
                 className="inline-block h-8 w-8 rounded-full ring-2 ring-white"
                 src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
@@ -78,8 +78,8 @@ const ContinueWatching = ({ dataMovies }) => {
             <span className="text-white">2 Miradores</span>
           </div>
           <Image
-            src={dataMovies[1]?.backdrop_path}
-            alt="Picture of the author"
+            src={dataMovies[1]?.backdrop_path || 'http://via.placeholder.com/640x360'}
+            alt="Banner de la pelicula"
             width={1000}
             height={170}
             className="rounded-xl -z-0 h-64 w-full object-cover"
@@ -92,8 +92,8 @@ const ContinueWatching = ({ dataMovies }) => {
             </div>
             <div className="h-full w-full flex items-center gap-8">
               <span className="text-gray-400 text-sm ml-2">32:48</span>
-              <div class="w-1/3 bg-gray-200 rounded-full h-2 dark:bg-gray-700">
-                <div class="bg-blue-600 h-2 rounded-full w-1/3"></div>
+              <div className="w-1/3 bg-gray-200 rounded-full h-2 dark:bg-gray-700">
+                <div className="bg-blue-600 h-2 rounded-full w-1/3"></div>
               </div>
               <span className="text-gray-400 text-sm">02:12</span>
             </div>
