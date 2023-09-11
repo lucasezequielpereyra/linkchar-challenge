@@ -55,9 +55,7 @@ const Genres = () => {
 
   // set fav genres to local state
   useEffect(() => {
-    if (favGenresRedux?.length > 0) {
-      setFavGenres(favGenresRedux)
-    }
+    setFavGenres(favGenresRedux)
   }, [favGenresRedux])
 
   // save fav genres to supabase
