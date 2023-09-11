@@ -1,6 +1,6 @@
 'use client'
 import Image from 'next/image'
-import { PlayCircleIcon } from '@heroicons/react/24/outline'
+import { PlayCircleIcon, EyeIcon } from '@heroicons/react/24/outline'
 import { useSelector } from 'react-redux'
 import { selectCurrentNewsMovies } from '@/redux/movies/moviesSlice'
 import propTypes from 'prop-types'
@@ -24,6 +24,12 @@ const Trailers = ({ random }) => {
         {randomMovies.map((movie, index) => {
           return (
             <div className="relative h-full w-full" key={index}>
+              <div className="flex justify-end w-full absolute z-10 mt-3 pr-3">
+                <span className="text-gray-200 flex items-center gap-1 text-xs">
+                  <EyeIcon className="h-3 w-3 mb-[2px]" />
+                  {(movie?.popularity / 1000).toFixed(1)} M
+                </span>
+              </div>
               <Image
                 src={movie?.backdrop_path}
                 alt="Picture of the author"
