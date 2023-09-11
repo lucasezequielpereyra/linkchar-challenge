@@ -34,7 +34,7 @@ const Movies = ({ random, handleDeleteMovie }) => {
   })
 
   return (
-    <div className="flex flex-col w-full px-10 md:px-24 lg:px-16 py-12">
+    <div className="flex flex-col w-full h-full px-10 md:px-24 lg:px-16 py-12 xl:border-l border-gray-800">
       <div className="w-full">{randomMovie && <MovieBanner movie={randomMovie} />}</div>
       <div className="w-full">
         {continueWatching !== undefined && <ContinueWatching dataMovies={continueWatching} />}
