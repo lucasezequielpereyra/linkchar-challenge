@@ -1,7 +1,7 @@
 'use client'
 import { useGetGenresQuery } from '@/redux/movies/moviesApiSlice'
 import { selectCurrentGenres, getGenres } from '@/redux/movies/moviesSlice'
-import { newFavGenre, removeFavGenre, selectCurrentFavGenres } from '@/redux/user/userSlice'
+import { newFavGenre, selectCurrentFavGenres } from '@/redux/user/userSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
@@ -87,7 +87,6 @@ const Genres = () => {
   const handleDeleteFavGenre = id => {
     const newGenres = favGenres.filter(genre => genre.id !== id)
     setFavGenres(newGenres)
-    dispatch(removeFavGenre(id))
   }
 
   return (
