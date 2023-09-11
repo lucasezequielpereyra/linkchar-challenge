@@ -35,11 +35,7 @@ const searchMovieCards = ({ movies, handleAddToWatchList, handleDeleteFavMovie }
     <>
       <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-10 px-44 w-full pb-10">
         {movies.map(movie => (
-          <div
-            key={movie.id}
-            className="cursor-pointer"
-            onClick={() => handleModal(modal, setModal, setModalMovie, movie)}
-          >
+          <div key={movie.id}>
             <span>
               <div className="mt-8">
                 <Image
@@ -47,7 +43,8 @@ const searchMovieCards = ({ movies, handleAddToWatchList, handleDeleteFavMovie }
                   alt={movie.title}
                   width={300}
                   height={450}
-                  className="hover:opacity-75 transition ease-in-out duration-150 rounded-3xl"
+                  className="hover:opacity-75 transition ease-in-out duration-150 rounded-3xl cursor-pointer"
+                  onClick={() => handleModal(modal, setModal, setModalMovie, movie)}
                 />
                 <div className="mt-2">
                   <div className="text-lg mt-2 text-white hover:text-gray-300 w-ull">
