@@ -3,7 +3,7 @@ import { useGetGenresQuery } from '@/redux/movies/moviesApiSlice'
 import { getGenres, selectCurrentGenres } from '@/redux/movies/moviesSlice'
 import { newFavGenre, removeFavGenre, selectCurrentFavGenres } from '@/redux/user/userSlice'
 import { useDispatch, useSelector } from 'react-redux'
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import GenresComponent from '@/components/genres'
 
@@ -15,7 +15,6 @@ const Genres = () => {
   const [favGenres, setFavGenres] = useState([])
   const [availableGenres, setAvailableGenres] = useState([])
   const [session, setSession] = useState(null)
-  const selectRef = useRef(null)
 
   // supabase
   const supabase = createClientComponentClient()
@@ -119,7 +118,6 @@ const Genres = () => {
           errorMsg={errorMsg}
           favGenres={favGenres}
           availableGenres={availableGenres}
-          selectRef={selectRef}
           handleDeleteFavGenre={handleDeleteFavGenre}
         />
       )}
