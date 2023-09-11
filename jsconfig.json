@@ -6,6 +6,7 @@
       "@app/*": ["./src/app/*"],
       "@views/*": ["./src/views/*"],
       "@redux/*": ["./src/redux/*"],
+      "@hooks/*": ["./src/hooks/*"],
     }
   }
 }
