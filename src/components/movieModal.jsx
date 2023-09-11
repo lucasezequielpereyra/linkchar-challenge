@@ -16,12 +16,12 @@ const MovieModal = ({ active, handleModal, modalRef, movie, trailer }) => {
   return (
     <div>
       <div
-        className="fixed inset-0 top-2 left-0 w-screen h-full bg-transparent backdrop-blur flex justify-center items-center z-50 box-border overflow-y-auto"
+        className="fixed inset-0 top-2 left-0 w-screen h-full bg-transparent backdrop-blur-3xl flex justify-center items-center z-50 box-border overflow-y-auto"
         ref={modalRef}
       >
         <div className="w-[90%] min-h-full flex flex-col">
           <div className=" bg-gray-950 flex justify-between items-center p-2 border-b border-primaryLogo">
-            <h3 className="text-xl text-white">
+            <h3 className="text-xl text-white font-bold">
               {trailer ? 'Trailer: ' : 'Pelicula: '} - {movie?.title}
             </h3>
             <button className="text-white text-xl" onClick={handleModal}>
@@ -41,17 +41,17 @@ const MovieModal = ({ active, handleModal, modalRef, movie, trailer }) => {
               </video>
             </div>
             <div className="mt-2 px-6 h-full text-white">
-              <h3 className="text-xl font-bold px-2">Titulo Original: {movie?.original_title}</h3>
-              <div className="flex gap-4">
+              <h3 className="text-xl font-bold px-2 py-1">
+                Titulo Original: {movie?.original_title}
+              </h3>
+              <div className="flex flex-col pb-4 md:flex-row gap-4 md:pb-4 lg:p-0">
                 <span className="text-sm font-bold px-2">
                   Fecha de estreno: {movie?.release_date}
                 </span>
-                -<span className="text-sm font-bold px-2">Calificacion: {movie?.vote_average}</span>
-                -
+                <span className="text-sm font-bold px-2">Calificacion: {movie?.vote_average}</span>
                 <span className="text-sm font-bold px-2 ">
                   Idiomar original: <span className="uppercase">{movie?.original_language}</span>
                 </span>
-                -
                 <span className="text-sm font-bold px-2">
                   Generos: <span className="capitalize">{getGenres?.join(', ')}</span>
                 </span>
