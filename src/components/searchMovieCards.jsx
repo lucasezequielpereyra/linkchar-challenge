@@ -1,8 +1,25 @@
 import propTypes from 'prop-types'
 import Image from 'next/image'
 import Balancer from 'react-wrap-balancer'
+import { selectCurrentFavMovies } from '@/redux/user/userSlice'
+import { useSelector } from 'react-redux'
 
-const searchMovieCards = ({ movies, handleAddToWatchList }) => {
+const searchMovieCards = ({ movies, handleAddToWatchList, handleDeleteFavMovie }) => {
+  const favMoviesRedux = useSelector(selectCurrentFavMovies)
+
+  const verifyIfMovieIsFav = movie => {
+    const favMovie = favMoviesRedux?.find(favMovie => favMovie.id === movie.id)
+    return favMovie ? true : false
+  }
+
+  const verifyDeleteFavMovie = movie => {
+    if (verifyIfMovieIsFav(movie)) {
+      return handleDeleteFavMovie(movie)
+    }
+
+    handleAddToWatchList(movie)
+  }
+
   return (
     <div>
       {/* Creame una galeria de imagenes con diseño material */}
@@ -37,9 +54,9 @@ const searchMovieCards = ({ movies, handleAddToWatchList }) => {
                     <button
                       type="button"
                       className="ml-2"
-                      onClick={() => handleAddToWatchList(movie)}
+                      onClick={() => verifyDeleteFavMovie(movie)}
                     >
-                      Agregar a mi lista
+                      {verifyIfMovieIsFav(movie) ? 'Quitar de favoritos' : 'Agregar a favoritos'}
                     </button>
                   </div>
                 </div>
@@ -56,5 +73,6 @@ export default searchMovieCards
 
 searchMovieCards.propTypes = {
   movies: propTypes.array.isRequired,
-  handleAddToWatchList: propTypes.func.isRequired
+  handleAddToWatchList: propTypes.func.isRequired,
+  handleDeleteFavMovie: propTypes.func.isRequired
 }

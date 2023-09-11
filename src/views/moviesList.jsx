@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from 'react'
 import SearchMovie from '@/components/searchMovie'
 import SearchMovieCards from '@/components/searchMovieCards'
-import { newFavMovie } from '@/redux/user/userSlice'
+import { getFavMovies, newFavMovie } from '@/redux/user/userSlice'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectCurrentFavMovies } from '@/redux/user/userSlice'
@@ -30,10 +30,10 @@ const MoviesList = () => {
 
   // get fav movies from redux
   const favMoviesRedux = useSelector(selectCurrentFavMovies)
-  const [favMovies, setFavMovies] = useState([])
+  const [newFavMovies, setNewFavMovies] = useState([])
 
   useEffect(() => {
-    setFavMovies(favMoviesRedux)
+    setNewFavMovies(favMoviesRedux)
   }, [favMoviesRedux])
 
   // effect for update fav movies db when favMovies change
@@ -41,18 +41,26 @@ const MoviesList = () => {
     if (session) {
       const updateFavMovies = async () => {
         try {
-          await supabase.from('users').update({ fav_movies: favMovies }).eq('id', session.id)
+          await supabase
+            .from('users')
+            .update({ favMovies: newFavMovies })
+            .eq('id', session?.user?.id)
         } catch (error) {
           console.log(error)
         }
       }
       updateFavMovies()
     }
-  }, [favMovies])
+  }, [newFavMovies])
 
   // set fav movies to local state
   const handleAddToWatchList = async movie => {
     dispatch(newFavMovie(movie))
+  }
+
+  const handleDeleteFavMovie = async movie => {
+    const newsFav = newFavMovies.filter(favMovie => favMovie.id !== movie.id)
+    dispatch(getFavMovies(newsFav))
   }
 
   useEffect(() => {
@@ -117,7 +125,11 @@ const MoviesList = () => {
         handleSearchMovie={handleSearchMovie}
         movies={movies}
       />
-      <SearchMovieCards movies={movies} handleAddToWatchList={handleAddToWatchList} />
+      <SearchMovieCards
+        movies={movies}
+        handleAddToWatchList={handleAddToWatchList}
+        handleDeleteFavMovie={handleDeleteFavMovie}
+      />
     </div>
   )
 }

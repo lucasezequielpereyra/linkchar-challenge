@@ -120,7 +120,7 @@ const Movies = () => {
     if (session) {
       const updateFavMovies = async () => {
         try {
-          await supabase.from('users').update({ fav_movies: favMoviesRedux }).eq('id', session.id)
+          await supabase.from('users').update({ favMovies: fanMovies }).eq('id', session?.user?.id)
         } catch (error) {
           console.log(error)
         }
