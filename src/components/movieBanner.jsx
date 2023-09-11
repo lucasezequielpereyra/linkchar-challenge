@@ -4,21 +4,22 @@ import { PlayIcon, StarIcon } from '@heroicons/react/24/outline'
 import { useState, useRef } from 'react'
 import MovieModal from './movieModal'
 import { usePressEscKey } from '@/hooks/usePressEscKey'
+import { handleModal } from '@/helpers/handleModal'
 
 const MovieBanner = ({ movie }) => {
   const [modal, setModal] = useState(false)
+  const [modalMovie, setModalMovie] = useState(null)
   const modalRef = useRef(null)
-
-  const handleModal = () => {
-    setModal(!modal)
-  }
 
   // Close modal when press ESC key
   usePressEscKey(() => setModal(false))
 
   return (
     <>
-      <div className="relative h-full w-full cursor-pointer" onClick={handleModal}>
+      <div
+        className="relative h-full w-full cursor-pointer"
+        onClick={() => handleModal(modal, setModal, setModalMovie, movie)}
+      >
         <div className="flex flex-row items-center  absolute z-10 rounded-md px-2 py-1 bg-transparent backdrop-blur-sm mt-4 ml-4 max-w-full w-fit]">
           <div className="flex -space-x-2 p-2 overflow-hidden">
             <Image
@@ -68,14 +69,14 @@ const MovieBanner = ({ movie }) => {
         </div>
       </div>
 
-      {
+      {modal && (
         <MovieModal
           active={modal}
           handleModal={() => setModal(!modal)}
           modalRef={modalRef}
-          movie={movie}
+          movie={modalMovie}
         />
-      }
+      )}
     </>
   )
 }
