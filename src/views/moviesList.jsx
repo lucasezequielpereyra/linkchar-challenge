@@ -25,43 +25,33 @@ const MoviesList = () => {
         setSession(userSession)
       }
     }
-
     checkUser()
   }, [])
 
   // get fav movies from redux
   const favMoviesRedux = useSelector(selectCurrentFavMovies)
   const [favMovies, setFavMovies] = useState([])
+
   useEffect(() => {
-    if (favMoviesRedux?.length > 0) {
-      setFavMovies(favMoviesRedux)
-    }
+    setFavMovies(favMoviesRedux)
   }, [favMoviesRedux])
+
+  // effect for update fav movies db when favMovies change
+  useEffect(() => {
+    if (session) {
+      const updateFavMovies = async () => {
+        try {
+          await supabase.from('users').update({ fav_movies: favMovies }).eq('id', session.id)
+        } catch (error) {
+          console.log(error)
+        }
+      }
+      updateFavMovies()
+    }
+  }, [favMovies])
 
   // set fav movies to local state
   const handleAddToWatchList = async movie => {
-    if (!session?.user) {
-      return
-    }
-
-    // check if movie is already in fav movies
-    const movieExists = favMovies.find(favMovie => favMovie.id === movie.id)
-
-    if (movieExists) {
-      return
-    }
-
-    // save movie to supabase
-    const { data, error } = await supabase
-      .from('users')
-      .update({ favMovies: [...favMovies, movie] })
-      .eq('id', session.user.id)
-
-    if (error) {
-      return
-    }
-
-    // save movie to redux
     dispatch(newFavMovie(movie))
   }
 

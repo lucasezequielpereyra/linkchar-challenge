@@ -64,7 +64,11 @@ const Genres = () => {
   useEffect(() => {
     if (session) {
       const saveFavGenres = async () => {
-        await supabase.from('users').update({ favGenres: favGenres }).eq('id', session.id)
+        try {
+          await supabase.from('users').update({ favGenres: favGenres }).eq('id', session.id)
+        } catch (error) {
+          console.log(error)
+        }
       }
       saveFavGenres()
     }
