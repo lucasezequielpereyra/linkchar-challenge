@@ -1,15 +1,16 @@
 import propTypes from 'prop-types'
 import Image from 'next/image'
 import { PlayIcon, ChevronRightIcon, StarIcon } from '@heroicons/react/24/outline'
+import Link from 'next/link'
 
 const PopularMovies = ({ dataMovies }) => {
   return (
     <div className="h-full w-full mt-16">
       <div className="mb-4 flex items-center justify-between">
         <h2 className="text-white text-2xl font-bold px-2 w-fit">Peliculas Popular 2021</h2>
-        <button className="text-gray-600 flex items-center">
+        <Link href="/movie" className="text-gray-600 flex items-center">
           All Movies <ChevronRightIcon className="h-4 w-4" />
-        </button>
+        </Link>
       </div>
       <div className="flex flex-col lg:flex-row w-full gap-6">
         {dataMovies.map((movie, index) => {

@@ -1,5 +1,7 @@
 import propTypes from 'prop-types'
 import Image from 'next/image'
+import Link from 'next/link'
+
 import {
   PlayIcon,
   StarIcon,
@@ -19,9 +21,9 @@ const ContinueWatching = ({ dataMovies }) => {
           <div className="border-t-2 border-gray-600 w-4 rotate-90 mt-0.5 ml-2" />
           <span className="text-sm text-gray-600 mt-0.5 ml-2">2 Movies</span>
         </div>
-        <button className="text-gray-600 flex items-center">
+        <Link href="/movie" className="text-gray-600 flex items-center">
           All Movies <ChevronRightIcon className="h-4 w-4" />
-        </button>
+        </Link>
       </div>
       <div className="flex flex-col gap-4 lg:flex-row">
         <div className="relative h-full w-full">
