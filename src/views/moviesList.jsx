@@ -46,7 +46,7 @@ const MoviesList = () => {
             .update({ favMovies: newFavMovies })
             .eq('id', session?.user?.id)
         } catch (error) {
-          console.log(error)
+          console.error(error)
         }
       }
       updateFavMovies()

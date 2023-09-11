@@ -67,7 +67,7 @@ const Genres = () => {
         try {
           await supabase.from('users').update({ favGenres: favGenres }).eq('id', session.id)
         } catch (error) {
-          console.log(error)
+          console.error(error)
         }
       }
       saveFavGenres()

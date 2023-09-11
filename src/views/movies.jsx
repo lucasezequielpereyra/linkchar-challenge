@@ -122,7 +122,7 @@ const Movies = () => {
         try {
           await supabase.from('users').update({ favMovies: fanMovies }).eq('id', session?.user?.id)
         } catch (error) {
-          console.log(error)
+          console.error(error)
         }
       }
       updateFavMovies()

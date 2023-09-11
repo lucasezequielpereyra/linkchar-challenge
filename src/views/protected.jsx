@@ -28,7 +28,7 @@ const Protected = ({ children }) => {
               .insert({ id: userSession.user.id, favGenres: [], favMovies: [] })
           }
         } catch (error) {
-          console.log(error)
+          console.error(error)
         }
       }
     }
