@@ -20,7 +20,27 @@ const Genres = () => {
 
   useEffect(() => {
     if (genresStatus === 'fulfilled') {
-      dispatch(getGenres(genresData))
+      const genresWithColors = genresData?.genres.map(genre => {
+        const colors = [
+          '#ef4444',
+          '#f97316',
+          '#22c55e',
+          '#6366f1',
+          '#d946ef',
+          '#f43f5e',
+          '#f59e0b',
+          '#10b981',
+          '#3b82f6',
+          '#6366f1',
+          '#8b5cf6',
+          '#ec4899',
+          '#f43f5e',
+          '#f59e0b'
+        ]
+        const color = colors[Math.floor(Math.random() * colors.length)]
+        return { ...genre, color }
+      })
+      dispatch(getGenres({ genres: genresWithColors }))
       setLoading(false)
     }
   }, [genresStatus])

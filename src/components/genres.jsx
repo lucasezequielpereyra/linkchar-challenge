@@ -18,12 +18,14 @@ const Genres = ({
             {favGenres?.map((genre, index) => (
               <div
                 key={index}
-                className="flex items-center text-whiterounded-md bg-primaryLogo gap-1 rounded-lg px-2 py-1 text-white text-sm w-fit h-fit"
+                style={{ backgroundColor: genre.color }}
+                onClick={() => handleDeleteFavGenre(genre.id)}
+                className="cursor-pointer flex items-center text-whiterounded-md gap-1 rounded-lg px-2 py-1 text-white text-sm w-fit h-fit"
               >
                 <span>{genre.name}</span>
-                <button onClick={() => handleDeleteFavGenre(genre.id)}>
+                <div>
                   <XMarkIcon className="h-4 w-4" />
-                </button>
+                </div>
               </div>
             ))}
           </div>
