@@ -12,6 +12,7 @@ import Image from 'next/image'
 import propTypes from 'prop-types'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { usePathname } from 'next/navigation'
+import Link from 'next/link'
 
 const Nav = ({ dataUser }) => {
   const pathname = usePathname()
@@ -56,7 +57,7 @@ const Nav = ({ dataUser }) => {
                     <div className="hidden md:block">
                       <div className="ml-12 lg:ml-20 xl:ml-32 flex items-baseline space-x-2 lg:space-x-4 xl:space-x-10">
                         {navigation.map(item => (
-                          <a
+                          <Link
                             key={item.name}
                             href={item.href}
                             className={classNames(
@@ -68,7 +69,7 @@ const Nav = ({ dataUser }) => {
                             aria-current={item.current ? 'page' : undefined}
                           >
                             {item.name}
-                          </a>
+                          </Link>
                         ))}
                       </div>
                     </div>
@@ -81,9 +82,9 @@ const Nav = ({ dataUser }) => {
                         className="relative rounded-full p-1 text-white hover:text-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                       >
                         <span className="sr-only">Buscar peliculas</span>
-                        <a href="/movie">
+                        <Link href="/movie">
                           <MagnifyingGlassIcon className="h-6 w-6" aria-hidden="true" />
-                        </a>
+                        </Link>
                       </button>
                       <button
                         type="button"
@@ -149,9 +150,9 @@ const Nav = ({ dataUser }) => {
                       className="relative rounded-full p-1 text-white hover:text-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 mr-3"
                     >
                       <span className="sr-only">Buscar peliculas</span>
-                      <a href="/movie">
+                      <Link href="/movie">
                         <MagnifyingGlassIcon className="h-6 w-6" aria-hidden="true" />
-                      </a>
+                      </Link>
                     </button>
                     <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                       <span className="sr-only">Abrir menu principal</span>
@@ -171,7 +172,7 @@ const Nav = ({ dataUser }) => {
                   {navigation.map(item => (
                     <Disclosure.Button
                       key={item.name}
-                      as="a"
+                      as={Link}
                       href={item.href}
                       className={classNames(
                         item.current

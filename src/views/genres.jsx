@@ -1,6 +1,6 @@
 'use client'
 import { useGetGenresQuery } from '@/redux/movies/moviesApiSlice'
-import { getGenres, selectCurrentGenres } from '@/redux/movies/moviesSlice'
+import { selectCurrentGenres, getGenres } from '@/redux/movies/moviesSlice'
 import { newFavGenre, removeFavGenre, selectCurrentFavGenres } from '@/redux/user/userSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
@@ -10,11 +10,35 @@ import GenresComponent from '@/components/genres'
 const Genres = () => {
   const dispatch = useDispatch()
   const [loading, setLoading] = useState(true)
-  const [addFavoriteGenre, setAddFavoriteGenre] = useState([])
   const [errorMsg, setErrorMsg] = useState('')
   const [favGenres, setFavGenres] = useState([])
   const [availableGenres, setAvailableGenres] = useState([])
   const [session, setSession] = useState(null)
+
+  // get genres to save to redux
+  const { data: genresData, status: genresStatus } = useGetGenresQuery()
+
+  useEffect(() => {
+    if (genresStatus === 'fulfilled') {
+      dispatch(getGenres(genresData))
+      setLoading(false)
+    }
+  }, [genresStatus])
+
+  // get redux genres
+  const dataGenres = useSelector(selectCurrentGenres)
+  useEffect(() => {
+    const availablesGenresFiltered = dataGenres?.filter(
+      genre => !favGenres?.some(favGenre => favGenre.id === genre.id)
+    )
+    setAvailableGenres(availablesGenresFiltered)
+  }, [dataGenres, favGenres])
+
+  // get fav genres from redux
+  const favGenresRedux = useSelector(selectCurrentFavGenres)
+  useEffect(() => {
+    setFavGenres(favGenresRedux)
+  }, [favGenresRedux])
 
   // supabase
   const supabase = createClientComponentClient()
@@ -28,22 +52,6 @@ const Genres = () => {
 
     getSession()
   }, [supabase.auth])
-
-  // get genres from api redux
-  const { data, status } = useGetGenresQuery()
-
-  // set genres to redux
-  useEffect(() => {
-    if (status === 'fulfilled') {
-      dispatch(getGenres(data))
-      setLoading(false)
-    }
-  }, [status])
-
-  // get fav genres from redux
-  const favGenresRedux = useSelector(selectCurrentFavGenres)
-  // get genres from redux
-  const genresRedux = useSelector(selectCurrentGenres)
 
   // set fav genres to local state
   useEffect(() => {
@@ -62,41 +70,12 @@ const Genres = () => {
     }
   }, [favGenres])
 
-  // set genres to local state
-  useEffect(() => {
-    if (genresRedux?.length > 0) {
-      setAvailableGenres(genresRedux)
-    }
-  }, [genresRedux])
-
-  // filter available genres
-  useEffect(() => {
-    const filterGenres = availableGenres.filter(
-      genre => !favGenres.find(favGenre => favGenre.id === genre.id)
-    )
-    setAvailableGenres(filterGenres)
-  }, [favGenres])
-
-  const handleChangeFavGenre = e => {
-    setErrorMsg('')
-    const normalize = e.map(genre => ({
-      id: genre.value,
-      name: genre.label
-    }))
-    setAddFavoriteGenre(normalize)
-  }
-
   // method to add new favorite genre
-  const handleNewFavGenre = previousGens => {
-    if (addFavoriteGenre.length > 0) {
-      const newGenres = previousGens.concat(addFavoriteGenre)
-      const uniqueGenres = [...new Set(newGenres)]
-      setFavGenres(uniqueGenres)
-      dispatch(newFavGenre(uniqueGenres))
-      setAddFavoriteGenre([{}])
-      selectRef.current.clearValue()
+  const handleNewFavGenre = genre => {
+    if (favGenres.length < 7) {
+      dispatch(newFavGenre(genre))
     } else {
-      setErrorMsg('Debes seleccionar al menos un genero')
+      setErrorMsg('Solo puedes agregar 7 géneros favoritos')
     }
   }
 
@@ -110,11 +89,12 @@ const Genres = () => {
   return (
     <>
       {loading ? (
-        <div className="loading text-white">Loading...</div>
+        <div className="flex justify-center items-center h-screen">
+          <div className="loading text-white">Loading...</div>
+        </div>
       ) : (
         <GenresComponent
           handleNewFavGenre={handleNewFavGenre}
-          handleChangeFavGenre={handleChangeFavGenre}
           errorMsg={errorMsg}
           favGenres={favGenres}
           availableGenres={availableGenres}

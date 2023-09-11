@@ -18,7 +18,6 @@ const userSlice = createSlice({
     },
     newFavGenre: (state, action) => {
       state.favGenres = state.favGenres.concat(action.payload)
-      state.favGenres = state.favGenres.filter(genre => genre.id === action.payload.id)
     },
     removeFavGenre: (state, action) => {
       state.favGenres = state.favGenres.filter(genre => genre.id !== action.payload)

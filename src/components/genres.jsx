@@ -5,7 +5,6 @@ import propTypes from 'prop-types'
 
 const Genres = ({
   handleNewFavGenre,
-  handleChangeFavGenre,
   errorMsg,
   favGenres,
   availableGenres,
@@ -35,12 +34,21 @@ const Genres = ({
               Agregar generos favoritos
             </span>
             <div className="flex gap-3 w-fit h-fit flex-wrap">
-              {availableGenres.map((genre, key) => (
-                <span className="bg-gray-800 text-white px-2 py-1 rounded-lg w-fit h-fit">
+              {availableGenres.map((genre, index) => (
+                <span
+                  className="bg-gray-800 text-white px-2 py-1 rounded-lg w-fit h-fit"
+                  key={index}
+                >
                   <button onClick={() => handleNewFavGenre(genre)}>{genre.name}</button>
                 </span>
               ))}
             </div>
+            {errorMsg && (
+              <div className="flex flex-row gap-3 items-center mt-3">
+                <ExclamationTriangleIcon className="h-6 w-6 text-yellow-500" />
+                <span className="text-yellow-500">{errorMsg}</span>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -52,7 +60,6 @@ export default Genres
 
 Genres.propTypes = {
   handleNewFavGenre: propTypes.func,
-  handleChangeFavGenre: propTypes.func,
   errorMsg: propTypes.string,
   favGenres: propTypes.array,
   availableGenres: propTypes.array,
