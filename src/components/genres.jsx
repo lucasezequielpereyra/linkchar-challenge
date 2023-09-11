@@ -1,5 +1,4 @@
 'use client'
-import { useId } from 'react'
 import { PlusCircleIcon, ExclamationTriangleIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import propTypes from 'prop-types'
 
