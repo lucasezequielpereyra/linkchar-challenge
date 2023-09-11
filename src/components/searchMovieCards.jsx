@@ -3,9 +3,20 @@ import Image from 'next/image'
 import Balancer from 'react-wrap-balancer'
 import { selectCurrentFavMovies } from '@/redux/user/userSlice'
 import { useSelector } from 'react-redux'
+import { handleModal } from '@/helpers/handleModal'
+import { useState, useRef } from 'react'
+import { usePressEscKey } from '@/hooks/usePressEscKey'
+import MovieModal from './movieModal'
 
 const searchMovieCards = ({ movies, handleAddToWatchList, handleDeleteFavMovie }) => {
   const favMoviesRedux = useSelector(selectCurrentFavMovies)
+
+  const [modal, setModal] = useState(false)
+  const [modalMovie, setModalMovie] = useState(null)
+  const modalRef = useRef(null)
+
+  // Close modal when press ESC key
+  usePressEscKey(() => setModal(false))
 
   const verifyIfMovieIsFav = movie => {
     const favMovie = favMoviesRedux?.find(favMovie => favMovie.id === movie.id)
@@ -21,11 +32,14 @@ const searchMovieCards = ({ movies, handleAddToWatchList, handleDeleteFavMovie }
   }
 
   return (
-    <div>
-      {/* Creame una galeria de imagenes con diseño material */}
+    <>
       <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-10 px-44 w-full pb-10">
         {movies.map(movie => (
-          <div key={movie.id}>
+          <div
+            key={movie.id}
+            className="cursor-pointer"
+            onClick={() => handleModal(modal, setModal, setModalMovie, movie)}
+          >
             <span>
               <div className="mt-8">
                 <Image
@@ -65,7 +79,15 @@ const searchMovieCards = ({ movies, handleAddToWatchList, handleDeleteFavMovie }
           </div>
         ))}
       </div>
-    </div>
+      {modal && (
+        <MovieModal
+          active={modal}
+          handleModal={() => setModal(!modal)}
+          modalRef={modalRef}
+          movie={modalMovie}
+        />
+      )}
+    </>
   )
 }
 

@@ -3,7 +3,7 @@ import { selectCurrentGenres } from '@/redux/movies/moviesSlice'
 import { useSelector } from 'react-redux'
 import Balancer from 'react-wrap-balancer'
 
-const MovieModal = ({ active, handleModal, modalRef, movie }) => {
+const MovieModal = ({ active, handleModal, modalRef, movie, trailer }) => {
   if (!active) return null
 
   const genres = useSelector(selectCurrentGenres)
@@ -13,8 +13,6 @@ const MovieModal = ({ active, handleModal, modalRef, movie }) => {
     return genreName?.name
   })
 
-  console.log(getGenres)
-
   return (
     <div>
       <div
@@ -23,7 +21,9 @@ const MovieModal = ({ active, handleModal, modalRef, movie }) => {
       >
         <div className="w-[90%] min-h-full flex flex-col">
           <div className=" bg-gray-950 flex justify-between items-center p-2 border-b border-primaryLogo">
-            <h3 className="text-xl text-white">Pelicula - {movie?.title}</h3>
+            <h3 className="text-xl text-white">
+              {trailer ? 'Trailer: ' : 'Pelicula: '} - {movie?.title}
+            </h3>
             <button className="text-white text-xl" onClick={handleModal}>
               x
             </button>
@@ -73,10 +73,6 @@ MovieModal.propTypes = {
   active: propTypes.bool.isRequired,
   handleModal: propTypes.func.isRequired,
   modalRef: propTypes.object,
-  movie: propTypes.object
-}
-
-MovieModal.defaultProps = {
-  modalTitle: 'Modal',
-  modalRef: null
+  movie: propTypes.object,
+  trailer: propTypes.bool
 }
