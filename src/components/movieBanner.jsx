@@ -6,7 +6,7 @@ const MovieBanner = ({ movie }) => {
   return (
     <div className="relative h-full w-full">
       <h2 className="text-white text-2xl font-bold px-2">{movie?.title}</h2>
-      <div className="flex flex-row items-center  absolute z-10 rounded-md px-2 py-1 bg-transparent backdrop-blur-lg mt-4 ml-4 max-w-full w-fit]">
+      <div className="flex flex-row items-center  absolute z-10 rounded-md px-2 py-1 bg-transparent backdrop-blur-sm mt-4 ml-4 max-w-full w-fit]">
         <div className="flex -space-x-2 p-2 overflow-hidden">
           <Image
             className="inline-block h-8 w-8 rounded-full ring-2 ring-white"
