@@ -11,7 +11,7 @@ import { useEffect, useState } from 'react'
 import {
   selectCurrentFavGenres,
   selectCurrentFavMovies,
-  getFavMovies
+  deleteFavMovie
 } from '@/redux/user/userSlice'
 import MoviesComponent from '@/components/movies'
 
@@ -115,24 +115,17 @@ const Movies = () => {
     setFanMovies(favMoviesRedux)
   }, [favMoviesRedux])
 
-  // effect for update fav movies db when favMovies change
-  useEffect(() => {
-    if (session) {
-      const updateFavMovies = async () => {
-        try {
-          await supabase.from('users').update({ favMovies: fanMovies }).eq('id', session?.user?.id)
-        } catch (error) {
-          console.error(error)
-        }
-      }
-      updateFavMovies()
-    }
-  }, [fanMovies])
-
   // handle delete movie from fav movies
-  const handleDeleteMovie = async movie => {
-    const newFavMovies = favMoviesRedux.filter(favMovie => favMovie.id !== movie.id)
-    dispatch(getFavMovies(newFavMovies))
+  const handleDeleteMovie = async deleteMovie => {
+    dispatch(deleteFavMovie(deleteMovie.id))
+    const newMovies = fanMovies.filter(movie => movie.id !== deleteMovie.id)
+    if (session) {
+      try {
+        await supabase.from('users').update({ favMovies: newMovies }).eq('id', session.user.id)
+      } catch (error) {
+        console.error(error)
+      }
+    }
   }
 
   return (

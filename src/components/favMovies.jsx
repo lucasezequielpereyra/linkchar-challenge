@@ -22,11 +22,7 @@ const FavMovies = ({ handleDeleteMovie, dataMovies }) => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
           {dataMovies.map((movie, index) => {
             return (
-              <div
-                className="relative h-full w-full cursor-pointer"
-                key={index}
-                onClick={() => handleModal(modal, setModal, setModalMovie, movie)}
-              >
+              <div className="relative h-full w-full" key={index}>
                 <img
                   src={movie?.backdrop_path}
                   alt="Picture of the author"
@@ -36,7 +32,10 @@ const FavMovies = ({ handleDeleteMovie, dataMovies }) => {
                 />
                 <div className="flex flex-row items-center justify-between absolute z-10 rounded-xl  bg-videoBackground backdrop-blur-sm -mt-[70px] max-w-full  w-full  h-[70px] bg-gray-200 ">
                   <div className="flex flex-row pl-6 gap-4 items-center">
-                    <div>
+                    <div
+                      onClick={() => handleModal(modal, setModal, setModalMovie, movie)}
+                      className="cursor-pointer"
+                    >
                       <PlayIcon className="h-6 w-6 text-white cursor-pointer" />
                     </div>
                     <div className="h-full w-full flex flex-col justify-center">

@@ -21,12 +21,21 @@ const userSlice = createSlice({
     },
     newFavMovie: (state, action) => {
       state.favMovies = state.favMovies.concat(action.payload)
+    },
+    deleteFavMovie: (state, action) => {
+      state.favMovies = state.favMovies.filter(movie => movie.id !== action.payload)
     }
   }
 })
 
-export const { getFavMovies, getFavGenres, newFavGenre, deleteFavGenre, newFavMovie } =
-  userSlice.actions
+export const {
+  getFavMovies,
+  getFavGenres,
+  newFavGenre,
+  deleteFavGenre,
+  newFavMovie,
+  deleteFavMovie
+} = userSlice.actions
 
 export default userSlice.reducer
 

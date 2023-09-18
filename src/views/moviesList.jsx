@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from 'react'
 import SearchMovie from '@/components/searchMovie'
 import SearchMovieCards from '@/components/searchMovieCards'
-import { getFavMovies, newFavMovie } from '@/redux/user/userSlice'
+import { deleteFavMovie, newFavMovie } from '@/redux/user/userSlice'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectCurrentFavMovies } from '@/redux/user/userSlice'
@@ -36,31 +36,31 @@ const MoviesList = () => {
     setNewFavMovies(favMoviesRedux)
   }, [favMoviesRedux])
 
-  // effect for update fav movies db when favMovies change
-  useEffect(() => {
-    if (session) {
-      const updateFavMovies = async () => {
-        try {
-          await supabase
-            .from('users')
-            .update({ favMovies: newFavMovies })
-            .eq('id', session?.user?.id)
-        } catch (error) {
-          console.error(error)
-        }
-      }
-      updateFavMovies()
-    }
-  }, [newFavMovies])
-
   // set fav movies to local state
   const handleAddToWatchList = async movie => {
     dispatch(newFavMovie(movie))
+    if (session) {
+      try {
+        await supabase
+          .from('users')
+          .update({ favMovies: [...newFavMovies, movie] })
+          .eq('id', session.user.id)
+      } catch (error) {
+        console.error(error)
+      }
+    }
   }
 
-  const handleDeleteFavMovie = async movie => {
-    const newsFav = newFavMovies.filter(favMovie => favMovie.id !== movie.id)
-    dispatch(getFavMovies(newsFav))
+  const handleDeleteFavMovie = async deleteMovie => {
+    dispatch(deleteFavMovie(deleteMovie.id))
+    const newMovies = newFavMovies.filter(movie => movie.id !== deleteMovie.id)
+    if (session) {
+      try {
+        await supabase.from('users').update({ favMovies: newMovies }).eq('id', session.user.id)
+      } catch (error) {
+        console.error(error)
+      }
+    }
   }
 
   useEffect(() => {
