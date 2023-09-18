@@ -27,7 +27,7 @@ const PopularMovies = ({ dataMovies }) => {
         <div className="flex flex-col lg:flex-row w-full gap-6">
           {dataMovies.map((movie, index) => {
             return (
-              <button
+              <div
                 className="relative h-full w-full"
                 key={index}
                 onClick={() => handleModal(modal, setModal, setModalMovie, movie)}
@@ -65,7 +65,7 @@ const PopularMovies = ({ dataMovies }) => {
                     </span>
                   </div>
                 </div>
-              </button>
+              </div>
             )
           })}
         </div>
