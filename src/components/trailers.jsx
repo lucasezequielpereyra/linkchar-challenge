@@ -1,5 +1,4 @@
 'use client'
-import Image from 'next/image'
 import { PlayCircleIcon, EyeIcon } from '@heroicons/react/24/outline'
 import { useSelector } from 'react-redux'
 import { selectCurrentNewsMovies } from '@/redux/movies/moviesSlice'
@@ -46,7 +45,7 @@ const Trailers = ({ random }) => {
                     {(movie?.popularity / 1000).toFixed(1)} M
                   </span>
                 </div>
-                <Image
+                <img
                   src={movie?.backdrop_path}
                   alt="Picture of the author"
                   width={1000}

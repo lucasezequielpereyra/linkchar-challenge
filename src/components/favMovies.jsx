@@ -1,6 +1,5 @@
 import propTypes from 'prop-types'
 import { PlayIcon } from '@heroicons/react/24/outline'
-import Image from 'next/image'
 import { handleModal } from '@/helpers/handleModal'
 import { useState, useRef } from 'react'
 import { usePressEscKey } from '@/hooks/usePressEscKey'
@@ -28,7 +27,7 @@ const FavMovies = ({ handleDeleteMovie, dataMovies }) => {
                 key={index}
                 onClick={() => handleModal(modal, setModal, setModalMovie, movie)}
               >
-                <Image
+                <img
                   src={movie?.backdrop_path}
                   alt="Picture of the author"
                   width={1000}

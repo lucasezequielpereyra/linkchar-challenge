@@ -44,8 +44,8 @@ const ContinueWatching = ({ dataMovies }) => {
             <div className="flex flex-row items-center justify-between absolute z-10 rounded-md px-2 py-1  bg-transparent backdrop-blur-lg mt-4 ml-4 max-w-full  w-fit h-[35px]">
               <span className="text-white">#1 Trending 🔥</span>
             </div>
-            <Image
-              src={dataMovies[0]?.backdrop_path || 'http://via.placeholder.com/640x360'}
+            <img
+              src={dataMovies[0]?.backdrop_path}
               alt="Banner de la pelicula"
               width={1000}
               height={170}
@@ -96,8 +96,8 @@ const ContinueWatching = ({ dataMovies }) => {
               </div>
               <span className="text-white">2 Miradores</span>
             </div>
-            <Image
-              src={dataMovies[1]?.backdrop_path || 'http://via.placeholder.com/640x360'}
+            <img
+              src={dataMovies[1]?.backdrop_path}
               alt="Banner de la pelicula"
               width={1000}
               height={170}

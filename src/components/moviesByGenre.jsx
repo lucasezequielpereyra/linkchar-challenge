@@ -1,5 +1,4 @@
 import propTypes from 'prop-types'
-import Image from 'next/image'
 import { PlayIcon, StarIcon } from '@heroicons/react/24/outline'
 import { handleModal } from '@/helpers/handleModal'
 import { useState, useRef } from 'react'
@@ -28,7 +27,7 @@ const MoviesByGenre = ({ dataMovies }) => {
                 key={index}
                 onClick={() => handleModal(modal, setModal, setModalMovie, movie)}
               >
-                <Image
+                <img
                   src={movie?.backdrop_path}
                   alt="Picture of the author"
                   width={1000}

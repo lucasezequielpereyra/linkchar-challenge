@@ -1,5 +1,4 @@
 import propTypes from 'prop-types'
-import Image from 'next/image'
 import Balancer from 'react-wrap-balancer'
 import { selectCurrentFavMovies } from '@/redux/user/userSlice'
 import { useSelector } from 'react-redux'
@@ -38,7 +37,7 @@ const searchMovieCards = ({ movies, handleAddToWatchList, handleDeleteFavMovie }
           <div key={movie.id}>
             <span>
               <div className="mt-8">
-                <Image
+                <img
                   src={movie.poster_path}
                   alt={movie.title}
                   width={300}

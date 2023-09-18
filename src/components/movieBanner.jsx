@@ -39,12 +39,11 @@ const MovieBanner = ({ movie }) => {
           </div>
           <span className="text-white w-fit">2 Amigos estan mirando</span>
         </div>
-        <Image
+        <img
           src={movie?.backdrop_path}
           alt="Picture of the author"
           width={1000}
           height={170}
-          priority
           className="rounded-xl -z-0 h-52 w-full object-cover"
         />
         <div className="flex flex-row items-center justify-between absolute z-10 rounded-xl  bg-transparent -mt-[70px] w-full max-w-full h-[70px] bg-gray-200 ">
