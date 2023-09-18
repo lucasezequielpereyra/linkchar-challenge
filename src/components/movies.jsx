@@ -23,7 +23,7 @@ const Movies = ({ random, handleDeleteMovie }) => {
 
   const randomMovie = dataMovies[random]
 
-  const continueWatching = [dataMovies[10], dataMovies[3]]
+  const continueWatching = [dataMovies[10], dataMovies[2]]
   const popularMovies = dataPopularMovies.slice(0, 3)
   const popularWithGenres = popularMovies.map(movie => {
     const genres = movie?.genre_ids.map(genreId => {

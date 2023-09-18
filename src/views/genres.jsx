@@ -1,7 +1,7 @@
 'use client'
 import { useGetGenresQuery } from '@/redux/movies/moviesApiSlice'
 import { selectCurrentGenres, getGenres } from '@/redux/movies/moviesSlice'
-import { newFavGenre, selectCurrentFavGenres } from '@/redux/user/userSlice'
+import { newFavGenre, selectCurrentFavGenres, deleteFavGenre } from '@/redux/user/userSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
@@ -78,33 +78,36 @@ const Genres = () => {
     setFavGenres(favGenresRedux)
   }, [favGenresRedux])
 
-  // save fav genres to supabase
-  useEffect(() => {
-    if (session) {
-      const saveFavGenres = async () => {
+  // method to add new favorite genre
+  const handleNewFavGenre = async genre => {
+    if (favGenres.length < 7) {
+      dispatch(newFavGenre(genre))
+      if (session) {
         try {
-          await supabase.from('users').update({ favGenres: favGenres }).eq('id', session.id)
+          await supabase
+            .from('users')
+            .update({ favGenres: [...favGenres, genre] })
+            .eq('id', session.id)
         } catch (error) {
           console.error(error)
         }
       }
-      saveFavGenres()
-    }
-  }, [favGenres])
-
-  // method to add new favorite genre
-  const handleNewFavGenre = genre => {
-    if (favGenres.length < 7) {
-      dispatch(newFavGenre(genre))
     } else {
       setErrorMsg('Solo puedes agregar 7 géneros favoritos')
     }
   }
 
   // mehtod to delete favorite genre
-  const handleDeleteFavGenre = id => {
+  const handleDeleteFavGenre = async id => {
+    dispatch(deleteFavGenre(id))
     const newGenres = favGenres.filter(genre => genre.id !== id)
-    setFavGenres(newGenres)
+    if (session) {
+      try {
+        await supabase.from('users').update({ favGenres: newGenres }).eq('id', session.id)
+      } catch (error) {
+        console.error(error)
+      }
+    }
   }
 
   return (
