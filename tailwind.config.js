@@ -12,7 +12,7 @@ module.exports = {
         primaryLogo: '#B7066F',
         secondaryLogo: '#FC6667',
         background: '#17171b',
-        videoBackground: 'rgba(219, 219, 219, 0.3)',
+        videoBackground: 'rgba(82, 82, 82, 0.4)',
         transparentData: 'rgba(255, 255, 255, 0.7)'
       }
     }
